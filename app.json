@@ -8,6 +8,18 @@
       "expo-router"
     ],
     "name": "veebank",
-    "slug": "veebank"
+    "slug": "veebank",
+    "icon": "./assets/icon.png",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d09fa2b3-0e28-4ce4-9a23-ef7692c116f7"
+      }
+    },
+    "android": {
+      "package": "com.veetech.veebank"
+    }
   }
 }
