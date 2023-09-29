@@ -6,6 +6,7 @@ import { Link } from 'expo-router';
 import { styles } from '../styles/styles';
 
 const index = () => {
+  
   const [isloading, setisloading] = useState(true);
 const progress = useRef(new Animated.Value(0)).current;
 const route = useRouter();

@@ -244,10 +244,10 @@ width: 80,
 alignItems: 'center'
   },
   fitz:{
-    padding: 7,
+    padding: 5,
     color: 'black',
     fontSize: 15,
-    width: 80,
+    width: 75,
     alignItems: 'center',
     borderRadius: 5
   },
@@ -258,8 +258,8 @@ alignItems: 'center'
   },
 
   fit:{
-width: '30%',
-padding: 10,
+width: '32%',
+padding: 5,
 backgroundColor: 'white',
 justifyContent: 'center',
 alignItems: 'center',
@@ -406,5 +406,6 @@ justifyContent: 'center'
                 borderRadius: 8,
                 backgroundColor: '#ebe9ff' 
               },
+              
 
 });

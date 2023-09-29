@@ -5,6 +5,10 @@ import Toast from 'react-native-toast-message';
 import { Link } from 'expo-router';
 import { styles } from '../../styles/styles';
 import { BackHandler } from 'react-native';
+import { Loginfunc } from '../Utils/Loginfunc';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const SlideTransition = ({ children }) => {
   const router = useRouter();
@@ -44,9 +48,31 @@ const index = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingbar, Setloadingbar] = useState(false)
 
-  const handleSignIn = () => {
-    // Implement your sign-in logic here
+
+  const handleSignIn = async () => {
+    Setloadingbar(true)
+    if (!email || !password) {
+      // Display an alert or error message for missing email or password
+
+      Toast.show({
+        
+
+        type: 'error',
+        text1: 'Please enter both email and password'
+      });
+      Setloadingbar(false)
+      return; 
+    }
+
+    try {
+
+      await Loginfunc(email, password);
+      Setloadingbar(false)
+    } catch (error) {
+      Setloadingbar(false)
+    }
   };
 
   const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
@@ -102,11 +128,24 @@ const index = () => {
 <View style={styles.butonthree}>
     
     
-    
-      <TouchableOpacity
+    {loadingbar ?   <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          router.push('Dashboard')
+          handleSignIn()
+    
+      }}
+      >
+
+
+
+<ActivityIndicator size="small" color="#d7c49e"   />
+
+      </TouchableOpacity> :
+        
+        <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          handleSignIn()
     
       }}
       >
@@ -116,6 +155,9 @@ const index = () => {
         <Text style={styles.buttonText}>Sign In</Text>
 
       </TouchableOpacity>
+
+      }
+    
 
       <Text style={styles.mediumtext}>Dont Have An Account ? <Link href='Register' style={styles.link}>Register</Link> </Text>
 

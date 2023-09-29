@@ -28,7 +28,7 @@ const Serviceplan = () => {
         }
       };
   return (
-    <View style={{ flex: 1, flexDirection: 'row', marginTop: 9, gap: 3, flexWrap:'wrap' }}>
+    <View style={{ flex: 1, flexDirection: 'row', marginTop: 9, gap: 3, alignItems:'center', justifyContent:'center', flexWrap:'wrap' }}>
     
      {notes.map((note) => (
         <View style={styles.fitz} key={note.id}>

@@ -6,7 +6,7 @@ const Transfer = () => {
   return (
     <View style={styles.mydashboarddata}>
       <Text style={styles.available}>Money Transfers</Text>
-      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 2, gap: 5, flexWrap:'wrap' }}>
+      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 2, gap: 3, flexWrap:'wrap' }}>
       <View style={styles.fit}>
    <View style={styles.iconbox}>
 

@@ -5,7 +5,7 @@ import { Stack } from 'expo-router';
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-
+import StateProvider from './components/StateContext'
 SplashScreen.preventAutoHideAsync();
 
  const layout = () => {
@@ -26,10 +26,10 @@ SplashScreen.preventAutoHideAsync();
 
   return (
 
-    <>
+    <StateProvider>
         <Stack onLayout={onLayoutRootView}/>
         <Toast />
-        </>
+        </StateProvider>
   )
 }
 
