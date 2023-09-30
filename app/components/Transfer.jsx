@@ -1,7 +1,7 @@
 import { View, Text,Image  } from 'react-native'
 import React from 'react'
 import { styles } from '../../styles/styles';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const Transfer = () => {
   return (
     <View style={styles.mydashboarddata}>
@@ -10,34 +10,31 @@ const Transfer = () => {
       <View style={styles.fit}>
    <View style={styles.iconbox}>
 
-      <Image
-        source={require('../../assets/fin.png')}
-        style={styles.bnk}
-      />
+   <Ionicons name='navigate-outline' size={24} color='#78990c'   style={styles.theicon}/>
       </View>
-      <Text style={styles.availables}>To Bank</Text>
+      <Text style={styles.availables}>Bank</Text>
       </View>
     <View style={styles.fit}>
    <View style={styles.iconbox}>
 
-      <Image
-        source={require('../../assets/card.png')}
-        style={styles.bnk}
-      />
+   <Ionicons name='radio-outline' size={24} color='#78990c'   style={styles.theicon}/>
       </View>
-      <Text style={styles.availables}>To VeeBank</Text>
+      <Text style={styles.availables}>VeeBank</Text>
       </View>
       <View style={styles.fit}>
    <View style={styles.iconbox}>
 
-      <Image
-        source={require('../../assets/Withdrawal.png')}
-        style={styles.bnk}
-      />
+   <Ionicons name='business-outline' size={24} color='#78990c'   style={styles.theicon}/>
       </View>
-      <Text style={styles.availables}>Vee Agent</Text>
+      <Text style={styles.availables}>Agent</Text>
       </View>
+      <View style={styles.fit}>
+   <View style={styles.iconbox}>
 
+   <Ionicons name='receipt-outline' size={24} color='#78990c'   style={styles.theicon}/>
+      </View>
+      <Text style={styles.availables}>History</Text>
+      </View>
       </View>
     </View>
   )

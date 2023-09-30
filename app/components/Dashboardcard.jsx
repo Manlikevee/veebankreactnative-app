@@ -2,7 +2,9 @@ import { View, Text , TouchableOpacity} from 'react-native'
 import React, {  useState } from 'react';
 import { styles } from '../../styles/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const Dashboardcard = () => {
+import accounting from 'accounting';
+const Dashboardcard = ({data}) => {
+
 
   const [visibleBalance, setvisibleBalance] = useState(false);
   const setfuncvisible = () => {
@@ -20,7 +22,7 @@ const Dashboardcard = () => {
 />
 </Text>
 <View style={styles.mydashboarddataflex}>
-<Text style={styles.amount}>  {!visibleBalance ? ('*****') : ('N200,000') } </Text>
+<Text style={styles.amount}>  {!visibleBalance ? ('*****') : (accounting.formatMoney(data?.balance, '₦', 2)) } </Text>
 <TouchableOpacity
         style={styles.dashbutton}>
             <Text  style={styles.txtwhite}>Add Money</Text>

@@ -4,23 +4,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Stack, useRouter } from 'expo-router'
 import { Link } from 'expo-router';
 import { styles } from '../styles/styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const index = () => {
   
-  const [isloading, setisloading] = useState(true);
+const [isloading, setisloading] = useState(true);
 const progress = useRef(new Animated.Value(0)).current;
 const route = useRouter();
 
-  const handleButtonPress = () => {
-
-    router.push('Login')
+  const handleButtonPress = async () => {
+const vee =  await AsyncStorage.getItem('my-access-key');
+{vee ? router.push('Welcomeback') : router.push('Login') }
+setisloading(!isloading); 
   };
   
   useEffect(() => {
     // Simulate loading completion after a delay (e.g., 3000 milliseconds)
     const loadingTimeout = setTimeout(() => {
-      setisloading(!isloading);
-      // router.push('Login')
+      handleButtonPress()
+
     }, 3000);
 
     // Clean up the timeout when the component unmounts
@@ -50,7 +54,7 @@ const route = useRouter();
       
       <View style= {styles.flexcolumn} >
       <Image
-        source={require('../assets/logo.png')}
+        source={require('../assets/logo2.png')}
         style={styles.image}
       />
 {isloading? (<ActivityIndicator size="large" color="#d7c49e"  style={styles.loader} />) : 

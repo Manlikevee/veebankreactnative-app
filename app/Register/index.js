@@ -41,7 +41,7 @@ const index = () => {
 <View style= {styles.containercenter}>
 <ImageBackground
         resizeMode="cover" 
-         source={require('../../assets/image66.png')}
+         source={require('../../assets/mm1.jpg')}
          style= {styles.bg}
          >
 

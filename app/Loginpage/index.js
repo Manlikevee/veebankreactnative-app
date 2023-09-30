@@ -106,7 +106,7 @@ const index = () => {
          >
 <View style={[styles.pad, styles.bgw]}>
 
-      <Text style={styles.title}>Welcome Back!</Text>
+      <Text style={styles.title}>Welcome</Text>
       <Text style={styles.mediumtext}>Sign in to your account</Text>
 <View style={styles.myimput}>
 <TextInput
@@ -114,6 +114,7 @@ const index = () => {
         placeholder="Email"
         onChangeText={(text) => setEmail(text)}
         value={email}
+        
       />
       <TextInput
         style={styles.input}

@@ -9,11 +9,13 @@ import ProfileScreen from '../components/Dashboardpages/ProfileScreen';
 import Servicespage from '../components/Dashboardpages/Servicespage'
 import ScreenHeaderBtn from '../components/ScreenHeaderBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import jwtDecode from 'jwt-decode';
+import { ToastAndroid } from 'react-native';
+import Logout from '../components/Logout';
 const Tab = createBottomTabNavigator();
 const Stacks = createStackNavigator();
 
-
+const router = useRouter();
 
 
 
@@ -25,14 +27,16 @@ const Stacks = createStackNavigator();
    
 const DashboardTabs = () => {
   
-  const [token, setToken] = useState(null);
-
+  const [token, setToken] = useState('');
+  const [Username, setUsername] = useState();
   useEffect(() => {
     // Function to retrieve the token from AsyncStorage
     const retrieveToken = async () => {
       try {
         const value = await AsyncStorage.getItem('my-access-key');
         if (value !== null) {
+          const decodedToken = jwtDecode(value);
+          setUsername(decodedToken.username);
           // The value exists in AsyncStorage, set it to the 'token' state variable
           setToken(value);
         } else {
@@ -50,6 +54,18 @@ const DashboardTabs = () => {
   }, []); // 
 
 
+  const logout = async  () => {
+    await AsyncStorage.removeItem('my-access-key');
+    await AsyncStorage.removeItem('my-refresh-key');
+
+    ToastAndroid.showWithGravity(
+      'User Logged Out successful',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+    router.push('Loginpage');
+  }
+
   return (
     <>
     <Stack.Screen
@@ -58,10 +74,10 @@ const DashboardTabs = () => {
         headerShadowVisible: false,
         headerTitle: '',
         headerLeft: () => (
-            <ScreenHeaderBtn text={token}  dimension='60%' />
+            <ScreenHeaderBtn text={token} Username={Username}  dimension='60%' />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn  dimension='100%' />
+            <Logout logoutfunc={logout} dimension='100%' />
           ),
     }} />
     <Tab.Navigator

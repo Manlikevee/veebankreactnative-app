@@ -24,18 +24,18 @@ export const Loginfunc = async (email, password) => {
       // Store tokens in AsyncStorage
       await AsyncStorage.setItem('my-access-key', response.data.access);
       await AsyncStorage.setItem('my-refresh-key', response.data.refresh);
-          router.push('Mydash');
-      // Display a success message using Toast
       ToastAndroid.showWithGravity(
         'User Login successful',
         ToastAndroid.SHORT,
         ToastAndroid.CENTER
       );
-
       router.push('Mydash');
+      // Display a success message using Toast
+
+
     } else {
       ToastAndroid.showWithGravity(
-        'Check Your Login Details',
+        'Login Failed',
         ToastAndroid.SHORT,
         ToastAndroid.CENTER
       );

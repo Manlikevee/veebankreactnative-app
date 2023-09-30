@@ -18,6 +18,7 @@ export const shadowStyles = Platform.select({
 
 
   },
+  
 });
 
 export const styles = StyleSheet.create({
@@ -78,7 +79,7 @@ alignItems: 'center',
   title:{
     fontFamily: 'SoraBold',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 20,
     marginTop:10,
     marginBottom: -8,
     color: '#185ADB'
@@ -92,13 +93,16 @@ backgroundColor: 'white',
 
   },
   loader:{
-marginTop: -38
+marginTop: 38
   },
   myviewstwo:{
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
  width: '100%',
    
+  },
+  icn:{
+fontWeight: '100'
   },
   splashimage:{
 height: 'auto',
@@ -127,9 +131,17 @@ height: 'auto',
 borderRadius: 4,
     padding: 10,
   },
+  inputhidden: {
+    width: '100%',
+    display: 'none',
+    borderColor: '#CFCFCF',
+    borderWidth: 1,
+borderRadius: 4,
+    padding: 10,
+  },
   splashbutton: {
 padding: 13,
-marginTop: -40,
+marginTop: 40,
 backgroundColor: '#d7c49e',
 borderRadius: 4,
 minWidth: '30%',
@@ -137,6 +149,7 @@ justifyContent: 'center',
 alignItems: 'center',
   },
   splashbuttontext:{
+
 fontSize: 13,
 fontWeight: '200',
 color: 'white'
@@ -171,7 +184,30 @@ alignItems: 'center',
     borderColor: '#185ADB',
     borderWidth: 1,
   },
+  buttonzz: {
+    padding: 18,
+    borderRadius: 5,
+    backgroundColor:'#185ADB',
+    width: '78%',
+    borderColor: '#185ADB',
+    borderWidth: 1,
+  },
+  smallbutton: {
+    padding: 18,
+    borderRadius: 5,
+    backgroundColor:'#185ADB',
+    width: '20%',
+    borderColor: '#e5ebed',
+    borderWidth: 1,
 
+
+    padding: 9,
+    borderRadius: 7,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e5ebed',
+
+  },
   buttonText:{
 
 textAlign: 'center',
@@ -228,8 +264,9 @@ textAlign: 'center',
     backgroundColor: 'red', // Customize the loading bar color
   },
   image: {
-    width: 150, // Set the width of the image
-    height: 150, // Set the height of the image
+    borderRadius :20,
+    width: 120, // Set the width of the image
+    height: 120, // Set the height of the image
     resizeMode: 'contain', // Resize mode (cover, contain, stretch, etc.)
   },
   mydashboard: {
@@ -258,8 +295,8 @@ alignItems: 'center'
   },
 
   fit:{
-width: '32%',
-padding: 5,
+width: '20%',
+padding: 4,
 backgroundColor: 'white',
 justifyContent: 'center',
 alignItems: 'center',
@@ -287,7 +324,7 @@ alignItems: 'center',
    alignItems: 'center'
   },
   dashbutton:{
-    padding: 7,
+    padding: 5,
     backgroundColor: '#6A35FF',
 
 
@@ -295,7 +332,7 @@ alignItems: 'center',
   },
 
   txtwhite:{
-    fontSize: 13,
+    fontSize: 12,
 color: 'white',
 paddingLeft: 7,
 paddingRight: 7
@@ -309,21 +346,35 @@ paddingRight: 7
   },
   availables:{
     fontFamily: 'Soramid',
-    fontSize: 13,
+    fontSize: 12,
 color: '#525452'
   },
 
   amount:{
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'SoraBold', 
-    color: '#1e1e1e'
+    color: '#1e1e1e',
   },
   iconbox:{
+    width: '75%',
     padding: 10,
     borderRadius: 7,
-    backgroundColor: '#0a1e52',
-    marginBottom: 5
+    backgroundColor: '#f3f6e1',
+    marginBottom: 2
       },
+      theicon:{
+color: '#78990c'
+      },
+      iconboxs:{
+        padding: 10,
+        width: '75%',
+        borderRadius: 7,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#e5ebed',
+        marginBottom: 5
+          },
+
       iconboxtwo:{
         padding: 10,
         borderRadius: 7,
@@ -358,7 +409,7 @@ fontWeight: '100'
     marginTop: 5,
                   },
         availablebold:{
-         fontSize: 15,
+         fontSize: 14,
          fontFamily: 'Soramid',
 
           color: '#1d8f26'
