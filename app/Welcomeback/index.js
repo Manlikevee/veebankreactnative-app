@@ -13,44 +13,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import jwtDecode from 'jwt-decode';
 import Fingerprint from '../Utils/Fingerprint';
 import { ToastAndroid } from 'react-native';
+import { Redirect } from 'expo-router';
 
-const router = useRouter();
-const SlideTransition = ({ children }) => {
-
-  const [slideAnimation] = useState(new Animated.Value(0));
-
-  useEffect(() => {
-    if (router.isTransitioning) {
-      Animated.timing(slideAnimation, {
-        toValue: 1,
-        duration: 500, // Adjust the duration as needed
-        useNativeDriver: false,
-      }).start();
-    } else {
-      slideAnimation.setValue(0);
-    }
-  }, [router.isTransitioning]);
-
-  const slideLeft = slideAnimation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -100], // Adjust the distance you want to slide
-  });
-
-  return (
-    <Animated.View
-      style={{
-        flex: 1,
-        transform: [{ translateX: slideLeft }],
-      }}
-    >
-      {children}
-    </Animated.View>
-  );
-};
 
 
 const index = () => {
-
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingbar, Setloadingbar] = useState(false)
@@ -210,15 +178,20 @@ const index = () => {
     }
   };
 
+  const checktoken = async  () => {
+   const ususerer =  await AsyncStorage.getItem('my-access-key');
+    if (!ususerer) {
+      router.push('Loginpage')
+      return <Redirect href="/Loginpage" />;
+    }
+  }
 
-
-
-
-
-      
+  useEffect(() => {
+    checktoken(); // Trigger the fetchData function when the component mounts
+  }, []);  
 
   return (
-    <SlideTransition>
+  
     <SafeAreaView style={{flex:1, backgroundColor: '#EFEFEF'}}>
         <Stack.Screen
         options={{
@@ -317,7 +290,7 @@ const index = () => {
     </View>
   
 
-      <Text style={styles.mediumtext}>Not {email} ? <Link href='Register' style={styles.link}>Login</Link> </Text>
+      <Text style={styles.mediumtext}>Not {email} ? <Text onPress={logout} style={styles.link}>Login</Text> </Text>
 
     </View>
 
@@ -333,7 +306,7 @@ const index = () => {
 
 
     </SafeAreaView>
-    </SlideTransition>
+
   )
 }
 

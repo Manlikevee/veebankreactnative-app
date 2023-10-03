@@ -7,41 +7,10 @@ import { styles } from '../../styles/styles';
 import { BackHandler } from 'react-native';
 import { Loginfunc } from '../Utils/Loginfunc';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Redirect } from 'expo-router';
 
 
 
-const SlideTransition = ({ children }) => {
-  const router = useRouter();
-  const [slideAnimation] = useState(new Animated.Value(0));
-
-  useEffect(() => {
-    if (router.isTransitioning) {
-      Animated.timing(slideAnimation, {
-        toValue: 1,
-        duration: 500, // Adjust the duration as needed
-        useNativeDriver: false,
-      }).start();
-    } else {
-      slideAnimation.setValue(0);
-    }
-  }, [router.isTransitioning]);
-
-  const slideLeft = slideAnimation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -100], // Adjust the distance you want to slide
-  });
-
-  return (
-    <Animated.View
-      style={{
-        flex: 1,
-        transform: [{ translateX: slideLeft }],
-      }}
-    >
-      {children}
-    </Animated.View>
-  );
-};
 
 
 const index = () => {
@@ -75,20 +44,24 @@ const index = () => {
     }
   };
 
-  const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
-    const showToast = () => {
-        Toast.show({
-        
 
-          type: 'success',
-          text1: 'This is some something that has to do with a text area👋'
-        });
-      }
+  const checktoken = async  () => {
+    console.log('rannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn')
+    const ususerer =  await AsyncStorage.getItem('my-access-key');
+     if (ususerer) {
+
+       router.push('Mydash')
+     }
+   }
+ 
+   useEffect(() => {
+    checktoken(); // Trigger the fetchData function when the component mounts
+  }, []);  
 
       
 
   return (
-    <SlideTransition>
+
     <SafeAreaView style={{flex:1, backgroundColor: '#EFEFEF'}}>
         <Stack.Screen
         options={{
@@ -175,7 +148,7 @@ const index = () => {
 
 
     </SafeAreaView>
-    </SlideTransition>
+
   )
 }
 

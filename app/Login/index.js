@@ -2,22 +2,11 @@ import { View, Button, Text, TouchableOpacity, SafeAreaView, ScrollView, ImageBa
 import React, { useEffect, useRef } from 'react';
 import { Stack, useRouter } from 'expo-router'
 import Toast from 'react-native-toast-message';
-import { Link } from 'expo-router';
+
 import { styles } from '../../styles/styles';
 
 const index = () => {
     const router = useRouter();
-    const showToast = () => {
-        Toast.show({
-        
-
-          type: 'success',
-          text1: 'This is some something that has to do with a text area👋'
-        });
-      }
-
-
-      
 
   return (
     <SafeAreaView style={{flex:1, backgroundColor: '#EFEFEF'}}>

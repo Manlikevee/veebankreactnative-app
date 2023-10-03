@@ -3,10 +3,13 @@ import React from 'react'
 import {styles} from '../../../styles/styles'
 import finImage from '../../../assets/fin.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
+
+
 const Serviceplan = () => {
-    
+  const route = useRouter();
     const notes = [
-        { id: 1, imageName: 'phone-portrait-outline', label: 'Airtime', color: '#203d72' },
+        { id: 1, imageName: 'phone-portrait-outline', label: 'Airtime', color: '#203d72', link:'Billpayment' },
         { id: 2, imageName: 'wifi-outline', label: 'Internet', color: '#203d72'  },
         { id: 3, imageName: 'tv-outline', label: 'TV', color: '#203d72'  },
         { id: 4, imageName: 'flash-outline', label: 'Power', color: '#203d72'  },
@@ -33,14 +36,22 @@ const Serviceplan = () => {
   return (
     <View style={{ flex: 1, flexDirection: 'row', marginTop: 9, gap: 2, alignItems:'center', justifyContent:'space-between', flexWrap:'wrap' }}>
     
-     {notes.map((note) => (
-        <View style={styles.fitz} key={note.id}>
+    {notes.map((note) => (
+  <TouchableOpacity
+    style={styles.fitz}
+    key={note.id}
+    onPress={() => {
+      if (note.link) {
+        route.push(`${note.link}`);
+      }
+    }}
+  >
           <View style={styles.iconboxs}>
             <Ionicons name={note.imageName} size={24} color={note.color}   style={styles.icn}/>
           </View>
           <Text style={styles.smalltext}>{note.label}</Text>
           
-        </View>
+        </TouchableOpacity>
       ))}
 
        </View>

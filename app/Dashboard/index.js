@@ -84,7 +84,7 @@ const index = () => {
 </View>
         </View>
       </ScrollView>
-<View style={[styles.dashboardsplash, shadowStyles]}>
+<View style={styles.dashboardsplash}>
   <Bottombar/>
 </View>
 

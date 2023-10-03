@@ -1,15 +1,18 @@
 import { View, Text , TouchableOpacity} from 'react-native'
-import React, {  useState } from 'react';
+import React, {  useState, useContext } from 'react';
 import { styles } from '../../styles/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import accounting from 'accounting';
+import { StateContext } from './StateContext';
 const Dashboardcard = ({data}) => {
 
 
   const [visibleBalance, setvisibleBalance] = useState(false);
   const setfuncvisible = () => {
     setvisibleBalance(!visibleBalance)
-  }
+  }  
+  const {word} = useContext(StateContext);
+  const {usewording} = useContext(StateContext);
 
   return (
     <View style={styles.mydashboarddata}>
@@ -22,10 +25,11 @@ const Dashboardcard = ({data}) => {
 />
 </Text>
 <View style={styles.mydashboarddataflex}>
-<Text style={styles.amount}>  {!visibleBalance ? ('*****') : (accounting.formatMoney(data?.balance, '₦', 2)) } </Text>
+<Text style={styles.amount}>  {!visibleBalance ? ('*****') : (accounting.formatMoney(data?.useraccountdata?.balance, '₦', 2)) } </Text>
 <TouchableOpacity
-        style={styles.dashbutton}>
-            <Text  style={styles.txtwhite}>Add Money</Text>
+        style={styles.dashbutton}
+        onPress={usewording}>
+            <Text  style={styles.txtwhite}>Add {word}</Text>
         </TouchableOpacity>
 </View>
 </View>

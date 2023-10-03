@@ -11,13 +11,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const index = () => {
   
 const [isloading, setisloading] = useState(true);
-const progress = useRef(new Animated.Value(0)).current;
-const route = useRouter();
 
+const route = useRouter();
+// Transactionhistory  Welcomeback  Login
   const handleButtonPress = async () => {
 const vee =  await AsyncStorage.getItem('my-access-key');
 {vee ? router.push('Welcomeback') : router.push('Login') }
-setisloading(!isloading); 
+         setisloading(!isloading); 
   };
   
   useEffect(() => {

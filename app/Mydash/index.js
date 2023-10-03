@@ -12,13 +12,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwtDecode from 'jwt-decode';
 import { ToastAndroid } from 'react-native';
 import Logout from '../components/Logout';
-const Tab = createBottomTabNavigator();
-const Stacks = createStackNavigator();
-
-const router = useRouter();
-
-
-
+import PrivateRoute from '../components/PrivateRoute';
+import { CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -26,7 +22,12 @@ const router = useRouter();
 
    
 const DashboardTabs = () => {
-  
+  const Tab = createBottomTabNavigator();
+const Stacks = createStackNavigator();
+const navigation = useNavigation();
+const router = useRouter();
+
+
   const [token, setToken] = useState('');
   const [Username, setUsername] = useState();
   useEffect(() => {
@@ -63,7 +64,8 @@ const DashboardTabs = () => {
       ToastAndroid.SHORT,
       ToastAndroid.CENTER
     );
-    router.push('Loginpage');
+    navigation.navigate('index');
+
   }
 
   return (
