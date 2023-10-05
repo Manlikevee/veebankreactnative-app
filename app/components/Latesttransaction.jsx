@@ -1,17 +1,37 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { styles } from '../../styles/styles';
-const Latesttransaction = () => {
+import accounting from 'accounting';
+import dayjs from 'dayjs';
+import { Link } from 'expo-router';
+const Latesttransaction = ({mydata}) => {
+
+  function formattedDate(dateString) {
+    // Parse the input date string and format it
+    return dayjs(dateString).format("MMMM D, YYYY, h:mm a");
+  }
+  
   return (
+
     <View style={styles.mydashboarddata}>
       <View style={styles.spacebetween}>
       <Text style={styles.available}>Latest Transaction  </Text>
       <Text style={styles.availablelight}>All  &gt;</Text>
       </View>
+
       <View style={styles.spacebetweens}>
-      <Text style={styles.availablebold}> -N200,000  </Text>
-      <Text style={styles.availablelight}>Sep 10 10:30:pm</Text>
+      <Link style={
+    mydata?.transactiondata?.is_credit ? styles.availablebold : styles.availablebolderror}
+  href={{
+    pathname:'Transactionreceipt',
+    params:{ 
+             ref: `${ mydata?.transactiondata?.id}`,   
+  }
+  }}>   {(accounting.formatMoney(mydata?.transactiondata?.amount, '₦', 2))}   
+  </Link>
+      <Text style={styles.availablelight}>{formattedDate(mydata?.transactiondata?.transaction?.created_at)} </Text>
       </View>
+    
     </View>
   )
 }

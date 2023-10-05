@@ -13,7 +13,7 @@ const Dashboardcard = ({data}) => {
   }  
   const {word} = useContext(StateContext);
   const {usewording} = useContext(StateContext);
-
+  const {loginfunc} = useContext(StateContext);
   return (
     <View style={styles.mydashboarddata}>
 <Text   onPress={setfuncvisible} style={styles.available}>Available Balance  <Ionicons
@@ -28,7 +28,7 @@ const Dashboardcard = ({data}) => {
 <Text style={styles.amount}>  {!visibleBalance ? ('*****') : (accounting.formatMoney(data?.useraccountdata?.balance, '₦', 2)) } </Text>
 <TouchableOpacity
         style={styles.dashbutton}
-        onPress={usewording}>
+        onPress={loginfunc}>
             <Text  style={styles.txtwhite}>Add {word}</Text>
         </TouchableOpacity>
 </View>

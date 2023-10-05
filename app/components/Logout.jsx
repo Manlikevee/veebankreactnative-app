@@ -4,7 +4,8 @@ import { View, Text } from 'react-native'
 const Logout = ({logoutfunc}) => {
   return (
     <View>
-      <Text onPress={logoutfunc}>Logout</Text>
+      
+      <Text onPress={logoutfunc}>Logout    </Text>
     </View>
   )
 }

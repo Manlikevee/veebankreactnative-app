@@ -26,8 +26,8 @@ const Popupreceipt = ({data}) => {
     </View>
   </View>
 
-   <Text style={{textAlign:'center', color:'474747', fontSize:15, marginBottom: 10 }}>Payment{data?.status}!</Text>
-   <Text style={{textAlign:'center', color:'474747', fontSize:20, marginBottom: 10 , fontWeight:'600'}}> {(accounting.formatMoney(data?.amount, '₦ ', 2))}   </Text>
+   <Text style={{textAlign:'center', color:'#474747', fontSize:15, marginBottom: 10 }}>Payment{data?.status}!</Text>
+   <Text style={{textAlign:'center', color:'#474747', fontSize:20, marginBottom: 10 , fontWeight:'600'}}> {(accounting.formatMoney(data?.amount, '₦ ', 2))}   </Text>
    </View>
 
 
@@ -44,7 +44,10 @@ const Popupreceipt = ({data}) => {
 
             <View style={styles.spacebet}>
               <Text style={styles.placeholder}>Account Name </Text>
-              <Text style={styles.placevalue}>{data?.recipient_bank_account?.account_name}</Text>
+              <Text style={styles.placevalue}>{data?.recipient_bank_account?.account_name ? 
+              (
+                data?.recipient_bank_account?.account_name
+              ): (data.recipient_user) }</Text>
             </View>
 
             <View style={styles.spacebet}>

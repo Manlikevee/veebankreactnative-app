@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from
 const Networkcard = ({ item, isActive, onPress  }) => {
   return ( 
     <TouchableOpacity style={[styles.card, isActive && styles.activeCard]}
-    onPress={() => onPress(item.id)}
+    onPress={() => onPress(item.network)}
     >
         <View style={styles.rounded}>
         <Image
@@ -13,6 +13,8 @@ const Networkcard = ({ item, isActive, onPress  }) => {
             uri: item.logo,
           }}
           style={styles.avatarXL}
+          contentFit={'contain'}
+          transition={15000}
         />
         </View>
      
@@ -25,20 +27,28 @@ const styles = StyleSheet.create({
   card: {
     width: 105, // Set the width of each card
     height: 122, // Set the height of each card
-    backgroundColor: '#F5F7FA',
-    borderRadius: 4,
+    backgroundColor: '#FFF',
+    borderRadius: 6,
     padding: 10,
     margin: 8,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    elevation: 1, // Android shadow
   },
   activeCard:{
     backgroundColor: '#FFF8E0',
   },
   avatarXL: {
-    width: 64,
-    height: 64,
+    width:'100%',
+    height: '100%',
     borderRadius: 4,
     resizeMode: 'contain',
   },

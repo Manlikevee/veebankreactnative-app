@@ -134,12 +134,14 @@ const Dashboardhome = () => {
           </View>
 
           <View style={styles.dashboardwhitehead}>
-            <Transfer />
+            <Transfer  />
           </View>
-
-          <View style={styles.dashboardwhitehead}>
-            <Latesttransaction />
-          </View>
+{mydata?.transactiondata?
+(      <View style={styles.dashboardwhitehead}>
+  <Latesttransaction mydata={mydata} />
+</View>) : ('')
+}
+    
           <View style={styles.dashboardwhitehead}>
             <Services />
           </View>

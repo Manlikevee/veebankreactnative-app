@@ -423,7 +423,7 @@ borderRadius: 5,
   },
   iconboxs: {
     padding: 10,
-    width: '75%',
+    width: '105%',
     borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
@@ -473,7 +473,14 @@ borderRadius: 5,
     fontSize: 14,
     fontFamily: 'Soramid',
 
-    color: '#1d8f26'
+    color: '#27C200'
+  },
+
+  availablebolderror: {
+    fontSize: 14,
+    fontFamily: 'Soramid',
+
+    color: '#FF4F4F'
   },
   smalltext: {
     color: '#868287',
@@ -727,11 +734,32 @@ alignItems: 'center'
     padding: 12,
     borderWidth: 1,
     gap: 5,
-    borderColor: '#F5F7FA',
+    borderColor: '#Fff',
     borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F5F7FA',
+    backgroundColor: '#FFF',
+    elevation: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    elevation: 1, // Android shadow
+  },
+  myactiveCard:{
+    flex: 1,
+    margin: 5,
+    padding: 12,
+    borderWidth: 1,
+    gap: 5,
+    borderColor: '#E4F9E0',
+    borderRadius: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E4F9E0',
   },
   gridText: {
     fontSize: 16,
@@ -743,6 +771,9 @@ fontFamily: 'Soramid',
     color: '#8b91a2',
     fontSize: 13,
     textAlign: 'center',
+  },
+  gridTextdayactive:{
+color:'#27C200'
   },
   gridTexttitle:{
     fontFamily: 'Soramid',

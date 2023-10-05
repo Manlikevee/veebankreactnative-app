@@ -1,12 +1,12 @@
-import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, FlatList, Alert } from 'react-native'
 import React, {  useState, useContext, useEffect  } from 'react';
 import {styles} from '../../../styles/styles'
-
 import BeneficaryCard from '../BeneficaryCard';
 import { Dropdown } from 'react-native-element-dropdown';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import Mybalancecard from '../Mybalancecard';
+import { Link } from 'expo-router';
 
 
 const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
@@ -17,10 +17,8 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
           .map((word) => word.charAt(0).toUpperCase()); // Get the first character of each word and convert it to uppercase
         return initials.join(''); // Join the initials to form the result
       }
-
-
     const [loadingbar, Setloadingbar] = useState(false)
-    const [value, setValue] = useState(null);
+    const [myval, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
     const [accountNumber, setAccountNumber] = useState('');
     const [accountName, setAccountName] = useState('');
@@ -29,7 +27,7 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
     const [selectedBank, setSelectedBank] = useState(null);
     const [loadingVerification, setLoadingVerification] = useState(false);
 
-
+    const isFormValid = accountNumber !== '' && selectedBank !== '' && accountName !== '' && amount !== '' &&  myval!=='';
     const handleAccountNumberChange = (newAccountNumber) => {
     
       
@@ -58,9 +56,9 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
                 },
               }
             );
-    
+            
             setAccountName(response.data.data.account_name);
-
+            
                     Toast.show({
         
 
@@ -101,7 +99,24 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
         fetchBanks();
       }, []);
 
-
+ const handletrf = () => {
+        if (accountNumber && accountName && amount && selectedBank && myval ) {
+       
+ 
+        } else {
+         Alert.alert(
+             'Alert',
+             'Kindly fill all fields',
+             [
+               {
+                 text: 'OK',
+                 onPress: () => console.log('OK Pressed'),
+               },
+             ],
+             { cancelable: true } // Allow users to dismiss the alert by tapping outside
+           );
+        }
+       }
 
  const withdraw = () => {
 
@@ -151,11 +166,11 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
 
 
           searchPlaceholder="Search..."
-          value={value}
+          value={myval}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
-            setValue(item.value);
+            setValue(item.label);
             setSelectedBank(item.value)
             setIsFocus(false);
           }}
@@ -171,12 +186,13 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
         placeholder="Beneficiary Account Number"
         onChangeText={handleAccountNumberChange}
         value={accountNumber}
+        keyboardType="numeric"
       />
 
       <TextInput
         style={styles.input}
         placeholder="Beneficiary Account Name"
-
+        editable={false}
         value={accountName}
         
       />
@@ -186,7 +202,7 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
         placeholder="Amount"
         onChangeText={(text) => setamount(text)}
         value={amount}
-        
+        keyboardType="numeric"
       />
 
       <TextInput
@@ -214,19 +230,35 @@ const Availablebalance = ({fetchBanks , banks, loadingBanks} ) => {
 
       </TouchableOpacity> :
         
-        <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-  
+        <>
+        { isFormValid ? (
+          <Link
+          style={styles.button}
+           href={{
+            pathname:'Paymentpinoutward',
+            params:{ Bank: `${myval}`,
+                     accountnumber: `${accountNumber}`,
+                     accountname: `${accountName}`,
+                     myamount: `${amount}`,
+                     mynaration: `${narration}`,
+                     bankcode: `${selectedBank}`
+          
+          }
+          }}>
+         
+           Proceed
+          </Link>
+        ) : ( <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+              handletrf()
+        }}
+        >
+          <Text style={styles.buttonText} >Transfer</Text>
+          </TouchableOpacity>) }
     
-      }}
-      >
 
-
-
-        <Text style={styles.buttonText} >Transfer</Text>
-
-      </TouchableOpacity>
+      </>
 
       }
     

@@ -1,16 +1,17 @@
 import axios from 'axios';
-import { Stack, useRouter } from 'expo-router';
+import {  useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ToastAndroid } from 'react-native';
 
 // Replace with your authentication API endpoint
-const API_URL = 'https://veebankbackend.vercel.app/token/';
-const router = useRouter();
+
+
 
 export const Loginfunc = async (email, password) => {
+  const router = useRouter();
   try {
-    const response = await axios.post(API_URL, {
+    const response = await axios.post('https://veebankbackend.vercel.app/token/', {
       username: email,
       password: password,
     }, {

@@ -1,27 +1,22 @@
 import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, FlatList, Alert,  Modal, Pressable,  } from 'react-native'
 import React, {  useState, useContext, useEffect  } from 'react';
 import {styles} from '../../../styles/styles'
-import accounting from 'accounting';
 import AxiosInstance from  '../../Utils/AxiosInstance'
 import BeneficaryCard from '../BeneficaryCard';
-import { Dropdown } from 'react-native-element-dropdown';
-import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import Mybalancecard from '../Mybalancecard';
-import OTPInputView from 'react-native-otp-inputs';
+
 import { Link } from 'expo-router';
-import Popupreceipt from './Popupreceipt';
+
 const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
-    const [modalVisible, setModalVisible] = useState(false);
     const [loadingbar, Setloadingbar] = useState(false);
-    const [value, setValue] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
     const [accountNumber, setAccountNumber] = useState('');
     const [accountName, setAccountName] = useState('');
     const [amount, setamount] = useState('');
     const [narration, setnarration] = useState('');
     const [selectedBank, setSelectedBank] = useState('Vee Bank');
     const [loadingVerification, setLoadingVerification] = useState(false);
+    
     const isFormValid = accountNumber !== '' && selectedBank !== '' && accountName !== '' && amount !== '';
 
     function getFirstTwoInitials(name) {

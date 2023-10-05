@@ -12,24 +12,15 @@ import OTPInputView from 'react-native-otp-inputs';
 import { Link } from 'expo-router';
 import Popupreceipt from './Popupreceipt';
 import Networkcard from '../Networkcard';
-const Bill = ({airtime, mydata }) => {
-    const [modalVisible, setModalVisible] = useState(false);
+const Allbill = ({mybillsdata, routetype, routename, mydata, pagekey }) => {
     const [loadingbar, Setloadingbar] = useState(false);
-    const [value, setValue] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
-    const [accountNumber, setAccountNumber] = useState('');
     const [phoneNumber, setphoneNumber] = useState('');
-    const [accountName, setAccountName] = useState('');
     const [amount, setamount] = useState('');
-    const [narration, setnarration] = useState('');
-    const [selectedBank, setSelectedBank] = useState('Vee Bank');
-    const [loadingVerification, setLoadingVerification] = useState(false);
     const [activeCard, setActiveCard] = useState(null);
-    const [activeairtimeCard, setActiveAirtimeCard] = useState(null);
-    const isFormValid = activeairtimeCard !== '' && activeCard !== '' && amount !== '' && phoneNumber !== '';
+    const isFormValid =  activeCard !== '' && amount !== '' && phoneNumber !== '';
     
     const handletrf = () => {
-      if (activeairtimeCard && activeCard && amount && phoneNumber ) {
+      if (  activeCard && amount && phoneNumber ) {
      
 
       } else {
@@ -48,22 +39,18 @@ const Bill = ({airtime, mydata }) => {
      }
     const handleCardPress = (cardId) => {
       setActiveCard(cardId);
-      setActiveAirtimeCard(null)
     };
 
 
-    const findActiveCardName = (cardIds, price ) => {
 
-        setActiveAirtimeCard(cardIds);
-        setamount(price);
-    };
-      
+
   
 
  
 
 
-      const activePlan = airtime.find((plan) => plan.network === activeCard);
+      const activeList = mybillsdata[routename];
+      console.log(activeList);
  
   return (
 
@@ -77,16 +64,16 @@ const Bill = ({airtime, mydata }) => {
  <Mybalancecard data={mydata}/>
  <View>
     <View style={styles.spacebetween}>
-      <Text style={styles.available}>Service Providers </Text>
+      <Text style={styles.available}>{routename} </Text>
       <Text style={styles.availablelight}></Text>
       </View>
 
       <FlatList
         style={{padding: 10,}}
-        data={airtime}
+        data={activeList}
         horizontal={true}
         renderItem={({ item }) => <Networkcard item={item} isActive={item.network === activeCard}   onPress={handleCardPress}/>}
-        keyExtractor={(item) => item.id.toString()} 
+        keyExtractor={(item) => item.network} 
       />
   </View>
 
@@ -94,71 +81,39 @@ const Bill = ({airtime, mydata }) => {
 
     <View style={{ padding: 10, gap: 20, marginTop: 10,  borderRadius: 3,}}>
 
-<View>
-    <FlatList
-        data={activePlan?.plans}
-        keyExtractor={(item) => item.name}
-        numColumns={3} // Number of columns in the grid
-        renderItem={({ item }) => (
-          <TouchableOpacity             
-          style={[
-            styles.gridItem,
-            item.name === activeairtimeCard ? styles.myactiveCard : null,
-          ]}
-          onPress={() => {
-            findActiveCardName(item.name,item.price);
-          }}
-          >
-                 <Text         
-                 style={[
-          styles.gridTextday,
-          item.name === activeairtimeCard ? styles.gridTextdayactive : null,
-        ]}>
-          {item.price}
-          </Text>
-            <Text         style={[
-          styles.gridText,
-          item.name === activeairtimeCard ? styles.gridTextdayactive : null,
-        ]}
-        >{item.data}</Text>
-            <Text         style={[
-          styles.gridTexttitle,
-          item.name === activeairtimeCard ? styles.gridTextdayactive : null,
-        ]}
-        >{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
-</View>
 
-{activeairtimeCard && (
+
       <TextInput
       editable={false}
       style={styles.input}
       placeholder=""
-   value={activeairtimeCard}
+   value={activeCard}
     />
-      )}
+   
 
 
-{activeCard && (
-        <TextInput
-        editable={false}
-        style={styles.input}
-        placeholder=""
-     value={activeCard}
-      />
 
-      )}
+
+
+
       <TextInput
 
         style={styles.input}
-        placeholder="Phone Number"
+        placeholder={pagekey}
         keyboardType="numeric"
         onChangeText={(text) => setphoneNumber(text)}
         value={phoneNumber}
       />
-<Text>{amount}</Text>
+
+
+<TextInput
+
+        style={styles.input}
+        placeholder="Amount"
+        onChangeText={(text) => setamount(text)}
+    value={amount}
+      />
+<Text></Text>
 
 
       
@@ -175,13 +130,14 @@ const Bill = ({airtime, mydata }) => {
             <Link
             style={styles.button}
              href={{
-              pathname:'AirtimePaymentpin',
+              pathname:'BillPaymentcomplete',
               params:{ 
                        phonenumber: `${phoneNumber}`,
                        network: `${activeCard}`,
                        myamount: `${amount}`,
-                       mynaration: `${activeairtimeCard}`
-            
+                       mynaration: `${activeCard}`,
+                       routename: `${routename}`,
+                       
             }
             }}>
            
@@ -210,4 +166,4 @@ const Bill = ({airtime, mydata }) => {
   )
 }
 
-export default Bill
+export default Allbill

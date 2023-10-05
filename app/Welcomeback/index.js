@@ -14,6 +14,7 @@ import jwtDecode from 'jwt-decode';
 import Fingerprint from '../Utils/Fingerprint';
 import { ToastAndroid } from 'react-native';
 import { Redirect } from 'expo-router';
+import PrivateRoute from '../components/PrivateRoute';
 
 
 
@@ -181,8 +182,8 @@ const index = () => {
   const checktoken = async  () => {
    const ususerer =  await AsyncStorage.getItem('my-access-key');
     if (!ususerer) {
-      router.push('Loginpage')
-      return <Redirect href="/Loginpage" />;
+      router.redirect('Loginpage');
+  
     }
   }
 

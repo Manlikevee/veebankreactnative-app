@@ -6,11 +6,11 @@ import { styles } from '../../styles/styles';
 const Othercomponentlayout = ({children, pagetitle}) => {
 
   return (
-    <SafeAreaView style={{flex:1, backgroundColor: '#EFEFEF'}}>
+    <SafeAreaView style={{flex:1, backgroundColor: '#f9f9f9'}}>
         <Stack.Screen
         options={{
             headerShown: true,
-            headerStyle:{backgroundColor: '#EFEFEF'},
+            headerStyle:{backgroundColor: '#f9f9f9'},
             headerShadowVisible: false,
             headerTitleStyle: { fontSize: 16 },
             headerTitle: `${pagetitle}`

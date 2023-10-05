@@ -1,16 +1,39 @@
-// PrivateRoute.js
-import React from 'react';
-import { useAuth } from './StateContext';
-import { useNavigation } from '@react-navigation/native';
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useAuth();
+import { View, Text } from 'react-native'
+import React, {  useContext, useState, useEffect } from 'react';
+import { StateContext } from './StateContext';
+import { Redirect } from 'expo-router';
+import { Stack, useRouter } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-  if (!isAuthenticated) {
-    navigation.navigate('Login'); 
-    return null; // or <Redirect to="/login" /> if using React Router
+const PrivateRoute = () => {
+  const [token, setToken] = useState(null);
+  const router = useRouter();
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        // Retrieve the token from AsyncStorage
+        const storedToken = await AsyncStorage.getItem('my-access-key');
+
+        // Update the state with the token value
+        setToken(storedToken);
+      } catch (error) {
+        console.error('Error retrieving token:', error);
+      }
+    };
+
+    getToken();
+  }, []); // The empty dependency array ensures this effect runs once, like componentDidMount
+
+  // Check if the token exists and redirect accordingly
+  if (token) {
+    router.push('Mydash');
   }
 
-  return <Component {...rest} />;
-};
+  return (
+    <View>
 
-export default PrivateRoute;
+    </View>
+  )
+}
+
+export default PrivateRoute

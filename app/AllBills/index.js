@@ -7,41 +7,31 @@ import { useLocalSearchParams } from 'expo-router'
 import { styles } from '../../styles/styles';
 import Othercomponentlayout from '../components/Othercomponentlayout';
 import {StateContext} from '../components/StateContext'
-import Bill from '../components/Transfercomponents/Bill';
+import Allbill from '../components/Transfercomponents/Allbill';
 import AxiosGet from '../Utils/AxiosGet';
+
+
 
 const Veetransfer = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const {mydata} = useContext(StateContext);
-  const {fetchData} = useContext(StateContext);
+  const {mybillsdata} = useContext(StateContext);
+  const {fetchBills} = useContext(StateContext);
   const [airtime, setAirtime] = useState([]);
-
-  const fetchairtime = () => {
-    AxiosGet('/airtime')
-      .then((response) => {
-        if (response) {
-          setAirtime(response);
-          console.log(response.data)
-        } else {
-          console.error('Error: Unexpected status code', response);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-
+  const { routetype } = useLocalSearchParams();
+  const { routename } = useLocalSearchParams();
+  const {mydata} = useContext(StateContext);
+  const {pagekey} = useLocalSearchParams();
   
   useEffect(() => {
-    fetchData(); // Trigger the fetchData function when the component mounts
-    fetchairtime();
+
+    fetchBills();
   }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    fetchairtime();
-    fetchData()
+    fetchBills();
+
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
@@ -63,7 +53,11 @@ const Veetransfer = () => {
 <View>
 
 
-<Bill airtime={airtime}/>
+{!(routename ==='null') ?
+(<Allbill mybillsdata={mybillsdata} routetype={routetype}  routename={routename}  mydata={mydata} 
+  pagekey={pagekey}/>)
+: (<Text>Coming SOON</Text>)}
+
 
 </View>
 </ImageBackground>
