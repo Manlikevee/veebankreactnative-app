@@ -17,7 +17,7 @@ const index = () => {
       >
         <View style={styles.iconbox}>
 
-   <Ionicons name='navigate-outline' size={24} color='#78990c'   style={styles.theicon}/>
+   <Ionicons name='navigate-outline' size={23} color='#78990c'   style={styles.theicon}/>
       </View>
       <Text style={styles.availables}>Bank</Text>
       </TouchableOpacity>
@@ -30,7 +30,7 @@ const index = () => {
       >
    <View style={styles.iconbox}>
 
-   <Ionicons name='radio-outline' size={24} color='#78990c'   style={styles.theicon}/>
+   <Ionicons name='radio-outline' size={23} color='#78990c'   style={styles.theicon}/>
       </View>
       <Text style={styles.availables}>VeeBank</Text>
       </TouchableOpacity>
@@ -43,7 +43,7 @@ const index = () => {
       >
    <View style={styles.iconbox}>
 
-   <Ionicons name='business-outline' size={24} color='#78990c'   style={styles.theicon}/>
+   <Ionicons name='business-outline' size={23} color='#78990c'   style={styles.theicon}/>
       </View>
       <Text style={styles.availables}>Agent</Text>
       </TouchableOpacity>
@@ -56,7 +56,7 @@ const index = () => {
       >
    <View style={styles.iconbox}>
 
-   <Ionicons name='receipt-outline' size={24} color='#78990c'   style={styles.theicon}/>
+   <Ionicons name='receipt-outline' size={23} color='#78990c'   style={styles.theicon}/>
       </View>
       <Text style={styles.availables}>History</Text>
       </TouchableOpacity>

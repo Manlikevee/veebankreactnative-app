@@ -209,7 +209,15 @@ const index = () => {
          style= {styles.bg}
          >
 <View style={[styles.pad, styles.bgw]}>
-
+ <View style={{justifyContent:'center', alignItems: 'center'}}>
+<Image
+        source={require('../../assets/logo21.png')}
+        style={{  borderRadius: 20,
+          width: 60, 
+          height: 60,
+          resizeMode: 'contain',}}
+      />
+      </View>
       <Text style={styles.title} onPress={Checktype}>Welcome Back {email}</Text>
       <Text style={styles.mediumtext}>Enter Your Password To Continue.</Text>
 <View style={styles.myimput}>

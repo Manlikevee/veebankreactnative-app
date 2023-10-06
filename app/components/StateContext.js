@@ -12,12 +12,27 @@ const StateProvider = ({ children }) => {
   const [word, useword] = useState('veess');
   const [mydata, setData] = useState([]);
   const [mybillsdata, setBillsData] = useState([]);
-
+  const [creditdebit, setcreditdebit] = useState([]);
   const fetchData = () => {
     AxiosGet('/userprofile/')
       .then((response) => {
         if (response) {
           setData(response);
+          console.log(response)
+        } else {
+          console.error('Error: Unexpected status code', response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+const Transactiondata = () => {
+    AxiosGet('/creditanddebit')
+      .then((response) => {
+        if (response) {
+          setcreditdebit(response);
           console.log(response)
         } else {
           console.error('Error: Unexpected status code', response);
@@ -60,7 +75,7 @@ const StateProvider = ({ children }) => {
     useword('test');
   };
   return (
-    <StateContext.Provider value={{token, setToken, isAuthenticated, loginfunc, logoutauth, word, usewording, mydata, fetchData , fetchBills, mybillsdata, setIsAuthenticated}}>
+    <StateContext.Provider value={{token, setToken, isAuthenticated, loginfunc, logoutauth, word, usewording, mydata, fetchData , fetchBills, mybillsdata, setIsAuthenticated, Transactiondata, creditdebit}}>
       {children}
     </StateContext.Provider>
   );

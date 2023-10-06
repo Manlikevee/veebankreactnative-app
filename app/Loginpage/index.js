@@ -117,7 +117,15 @@ const index = () => {
          style= {styles.bg}
          >
 <View style={[styles.pad, styles.bgw]}>
-
+<View style={{justifyContent:'center', alignItems: 'center'}}>
+<Image
+        source={require('../../assets/logo21.png')}
+        style={{  borderRadius: 20,
+          width: 60, 
+          height: 60,
+          resizeMode: 'contain',}}
+      />
+      </View>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.mediumtext}>Sign in to your account</Text>
 <View style={styles.myimput}>

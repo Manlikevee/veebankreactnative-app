@@ -309,6 +309,7 @@ borderRadius: 5,
     height: 10,
     backgroundColor: 'red', // Customize the loading bar color
   },
+
   image: {
     borderRadius: 20,
     width: 120, // Set the width of the image
@@ -328,6 +329,7 @@ borderRadius: 5,
   mydashboard: {
     padding: 13,
     gap: 24,
+    width: '100%',
   },
   fits: {
     padding: 10,
@@ -357,8 +359,50 @@ borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  dashboardwhiteheadflex: {
+    padding: 10,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    gap: 8,
+    width: '100%',
+    borderRadius: 5,
+  },
 
+  mydebit:{
+    borderRadius: 5,
+    width: '49%',
+    backgroundColor: '#FFE5E5',
+    padding: 16,
+    flexDirection: 'column',
+    gap: 5,
+  },
+  mycredit:{
+    borderRadius: 5,
+    width: '49%',
+backgroundColor: '#E4F9E0',
+padding: 16,
+flexDirection: 'column',
+gap: 5,
+  },
 
+  mycreditcolor:{
+    color: '#27C200',
+    gap: 9,
+    fontSize: 15,
+  },
+  icnv:{
+marginLeft: 10,
+color: '#27C200',
+  },
+  icnd:{
+    marginLeft: 10,
+    color: '#FF4F4F',
+      },
+  mydebitcolor:{
+    color: '#FF4F4F',
+gap: 9,
+    fontSize: 16,
+  },
   dashboardwhitehead: {
     padding: 10,
     borderRadius: 8,
@@ -421,9 +465,10 @@ borderRadius: 5,
   theicon: {
     color: '#78990c'
   },
+
   iconboxs: {
     padding: 10,
-    width: '105%',
+    width: '100%',
     borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',

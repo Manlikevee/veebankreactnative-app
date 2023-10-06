@@ -26,7 +26,10 @@ const index = () => {
  
         <Image
         source={require('../../assets/loginsplash.png')}
-        
+        style={{  borderRadius: 20,
+          width: '100%', 
+          height: 260,
+          resizeMode: 'contain',}}
       />
       </View>
 </View>

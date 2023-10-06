@@ -58,12 +58,12 @@ const Transactiondatacard = ({data}) => {
             
               </Text>
               <Text style={styles.trxtyp}>
-                Fund Transfer
+              {transaction.is_billpayment ? (<Text> Bill Payment </Text> ) :  (<Text> Fund Transfer</Text> )  }
               </Text>
             </View>
             <Text style={styles.fundamount}>{(accounting.formatMoney(transaction.amount, '₦ ', 2))} </Text>
             <Link 
-          style={{width:'100%', borderRadius: 5, padding: 7, textAlign:'center', backgroundColor:'#E4F9E0',color:'#27C200', fontSize:13 }}
+          style={{width:'100%', borderRadius: 3, padding: 10, textAlign:'center', backgroundColor:'#E4F9E0',color:'#27C200', fontSize:13 }}
           href={{
             pathname:'Transactionreceipt',
             params:{ 
