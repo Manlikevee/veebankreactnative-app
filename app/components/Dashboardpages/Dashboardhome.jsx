@@ -18,7 +18,6 @@ import { ToastAndroid } from 'react-native';
 import PrivateRoute from '../PrivateRoute';
 import { AuthProvider } from '../../components/StateContext'
 import { StateContext } from '../../components/StateContext';
-import { Redirect } from 'expo-router';
 const Dashboardhome = () => {
   const isFocused = useIsFocused();
 

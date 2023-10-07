@@ -4,11 +4,11 @@ import { Stack, useRouter } from 'expo-router'
 import Toast from 'react-native-toast-message';
 import { ToastAndroid } from 'react-native';
 import { Link } from 'expo-router';
+import { router } from 'expo-router';
 import { styles } from '../../styles/styles';
 import { BackHandler } from 'react-native';
 import { Loginfunc } from '../Utils/Loginfunc';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Redirect } from 'expo-router';
 import PrivateRoute from '../components/PrivateRoute';
 import { StateContext } from '../components/StateContext';
 import axios from 'axios';
@@ -16,7 +16,7 @@ import axios from 'axios';
 
 
 const index = () => {
-  const router = useRouter();
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingbar, Setloadingbar] = useState(false)
@@ -60,7 +60,7 @@ const index = () => {
             ToastAndroid.CENTER
           );
           setIsAuthenticated(true)
-          router.push('Mydash');
+          router.replace('/Mydash');
           // Display a success message using Toast
     
     

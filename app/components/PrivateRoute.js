@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
 import React, {  useContext, useState, useEffect } from 'react';
 import { StateContext } from './StateContext';
-import { Redirect } from 'expo-router';
 import { Stack, useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

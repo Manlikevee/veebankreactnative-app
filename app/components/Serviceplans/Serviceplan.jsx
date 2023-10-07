@@ -35,7 +35,7 @@ const Serviceplan = () => {
         }
       };
   return (
-    <View style={{ flex: 1, flexDirection: 'row', marginTop: 9, gap: 2, alignItems:'center', justifyContent:'space-between', flexWrap:'wrap' }}>
+    <View style={{ flex: 1, flexDirection: 'row', marginTop: 9, gap: 5, alignItems:'center', justifyContent:'space-between', flexWrap:'wrap' }}>
     
     {notes.map((note) => (
   <TouchableOpacity

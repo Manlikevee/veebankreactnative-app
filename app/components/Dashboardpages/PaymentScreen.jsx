@@ -35,9 +35,9 @@ function formattedDate(dateString) {
 
 
 const Paymentscreen = () => {
+  const { Transactiondata } = useContext(StateContext);
   const [refreshing, setRefreshing] = useState(false);
   const { mydata } = useContext(StateContext);
-  const { Transactiondata } = useContext(StateContext);
   const {creditdebit} = useContext(StateContext);
  
   const onRefresh = React.useCallback(() => {

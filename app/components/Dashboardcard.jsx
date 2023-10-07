@@ -29,7 +29,7 @@ const Dashboardcard = ({data}) => {
 <TouchableOpacity
         style={styles.dashbutton}
         onPress={loginfunc}>
-            <Text  style={styles.txtwhite}>Add {word}</Text>
+            <Text  style={styles.txtwhite}>Add</Text>
         </TouchableOpacity>
 </View>
 </View>

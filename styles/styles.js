@@ -123,6 +123,7 @@ fontFamily: 'Soramid',
 backgroundColor: 'white',
 padding: 10,
 borderRadius: 5,
+
   },
   loader: {
     marginTop: 38
@@ -340,6 +341,7 @@ borderRadius: 5,
   },
   fitz: {
     padding: 5,
+    marginTop:5,
     color: 'black',
     fontSize: 15,
     width: 75,
@@ -473,7 +475,7 @@ gap: 9,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#e5ebed',
-    marginBottom: 5
+    marginBottom: 10
   },
 
   iconboxtwo: {
@@ -530,6 +532,7 @@ gap: 9,
   smalltext: {
     color: '#868287',
     fontSize: 12,
+    marginTop: 4,
   },
   splashstyle: {
     width: '100%',
@@ -825,5 +828,76 @@ color:'#27C200'
     fontSize: 12,
     color: '#525452',
     textAlign: 'center',
+  },
+  allservices:{
+gap:20,
+width: '100%',
+padding: 15,
+backgroundColor: 'white',
+  },
+  servicestext:{
+    color: '#373737',
+    textAlign: 'center',
+    fontFamily: 'Soramid',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  servicebox:{
+    padding: 20,
+    gap: 6,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(62, 75, 148, 0.1)',
+    marginBottom: 20
+  },
+  trxheader:{
+    textTransform: 'capitalize',
+    marginTop: 0,
+    color: '#23325f',
+    fontSize: 17,
+    lineHeight: 23,
+    fontWeight: '600',
+    textAlign: 'center'
+  },
+  txtcontent:{
+    fontSize: 14,
+    lineHeight: 22,
+    color: 'rgba(76, 85, 102, 0.8)',
+  },
+  imgbx:{
+paddingHorizontal:40,
+alignItems: 'center',
+justifyContent: 'center'
+  },
+  exploreservice:{
+    textAlign: 'center',
+    color: '#546fff',
+    marginTop: 6
+  },
+  bluebg:{
+    backgroundColor: '#6a9ff7',
+    padding:45,
+    borderRadius: 4,
+  },
+  bluebgsmall:{
+    backgroundColor: '#6a9ff7',
+    padding:15,
+    borderRadius: 4,
+  }
+,
+mylabel:{
+    textTransform: 'capitalize',
+    color: '#23325f',
+    fontSize: 14,
+    lineHeight: 23,
+    fontWeight: '600',
+
+  }
+  ,
+  mywordings:{
+    fontSize: 14,
+    lineHeight: 22,
+    color: 'rgba(76, 85, 102, 0.8)',
   }
 });

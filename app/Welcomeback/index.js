@@ -13,13 +13,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import jwtDecode from 'jwt-decode';
 import Fingerprint from '../Utils/Fingerprint';
 import { ToastAndroid } from 'react-native';
-import { Redirect } from 'expo-router';
 import PrivateRoute from '../components/PrivateRoute';
-
+import { router } from 'expo-router';
 
 
 const index = () => {
-  const router = useRouter();
+  const routers = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingbar, Setloadingbar] = useState(false)
@@ -58,7 +57,7 @@ const index = () => {
       ToastAndroid.SHORT,
       ToastAndroid.CENTER
     );
-    router.push('Loginpage');
+    router.replace('/Loginpage');
   }
   
   const handleButtonPress = async () => {
@@ -89,7 +88,7 @@ const index = () => {
               ToastAndroid.CENTER
             );
             Setloadingbar(false)
-            router.push('Mydash');
+            router.replace('/Mydash');
           } else {
             console.log('Good: Good', response.data);
             const { access, refresh } = response.data;
@@ -101,7 +100,7 @@ const index = () => {
               ToastAndroid.CENTER
             );
             Setloadingbar(false)
-            router.push('Mydash');
+            router.replace('/Mydash');
       
           }
         } catch (error) {
@@ -182,7 +181,7 @@ const index = () => {
   const checktoken = async  () => {
    const ususerer =  await AsyncStorage.getItem('my-access-key');
     if (!ususerer) {
-      router.redirect('Loginpage');
+      router.replace('/Loginpage');
   
     }
   }

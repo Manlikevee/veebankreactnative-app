@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   avatarXL: {
     width:'100%',
     height: '100%',
-    borderRadius: 4,
     resizeMode: 'contain',
   },
   rounded:{
