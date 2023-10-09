@@ -4,14 +4,16 @@ import dayjs from 'dayjs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
-
+import { Stack, useRouter } from 'expo-router'
 const getUser = async () => {
+  
   const refreshtoken = await AsyncStorage.getItem('my-refresh-key');
   const accesstoken = await AsyncStorage.getItem('my-access-key');
   return { accesstoken, refreshtoken };
 };
 
 const logout = async () => {
+  const router = useRouter();
   const navigation = useNavigation();
   await AsyncStorage.removeItem('my-access-key');
   await AsyncStorage.removeItem('my-refresh-key');
@@ -21,7 +23,8 @@ const logout = async () => {
     ToastAndroid.SHORT,
     ToastAndroid.CENTER
   );
-  navigation.navigate('index');
+  router.push('Login')
+  // navigation.navigate('index');
 };
 
 const baseURL = 'https://veebankbackend.vercel.app';

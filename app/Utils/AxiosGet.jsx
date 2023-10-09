@@ -1,8 +1,25 @@
 import axios from 'axios';
 import { ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Stack, useRouter } from 'expo-router'
 // Define a reusable Axios GET function with a Bearer token
+
+const logout = async () => {
+  const router = useRouter();
+  await AsyncStorage.removeItem('my-access-key');
+  await AsyncStorage.removeItem('my-refresh-key');
+
+  ToastAndroid.showWithGravity(
+    'Session Expired',
+    ToastAndroid.SHORT,
+    ToastAndroid.CENTER
+  );
+  router.push('Login')
+  // navigation.navigate('index');
+};
+
+
+
 const AxiosGet = async (urlPath) => {
   try {
     // Get the Bearer token from AsyncStorage
@@ -15,6 +32,7 @@ const AxiosGet = async (urlPath) => {
         ToastAndroid.SHORT,
         ToastAndroid.CENTER
       );
+      router.push('Login')
       throw new Error('Authentication token is missing');
     }
 

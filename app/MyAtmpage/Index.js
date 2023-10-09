@@ -9,45 +9,44 @@ import Othercomponentlayout from '../components/Othercomponentlayout';
 import {StateContext} from '../components/StateContext'
 import Bill from '../components/Transfercomponents/Bill';
 import AxiosGet from '../Utils/AxiosGet';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Index = () => {
+
+const index = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
-  const {mydata} = useContext(StateContext);
-  const {fetchData} = useContext(StateContext);
-  const [airtime, setAirtime] = useState([]);
-
-  const fetchairtime = () => {
-    AxiosGet('/airtime')
-      .then((response) => {
-        if (response) {
-          setAirtime(response);
-          console.log(response.data)
-        } else {
-          console.error('Error: Unexpected status code', response);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-
+  const {fetchatmData} = useContext(StateContext);
+  const {atmdetails} = useContext(StateContext);
+  const [visibleBalance, setvisibleBalance] = useState(false);
+  const setfuncvisible = () => {
+    setvisibleBalance(!visibleBalance)
+  } 
   
   useEffect(() => {
-    fetchData(); // Trigger the fetchData function when the component mounts
-    fetchairtime();
+    fetchatmData()
   }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    fetchairtime();
-    fetchData()
+    fetchatmData()
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  const renderCardNumber = (cardNumber) => {
+    if(cardNumber) {
+      if (visibleBalance) {
+        return cardNumber; // Show the full card number when visibleBalance is true
+      } else {
+        const lastFourDigits = cardNumber.slice(-4); // Extract the last 4 digits
+        return "**** **** **** " + lastFourDigits; // Display masked card number
+      }
+    }
+
+  }
+
   return (
-    <Othercomponentlayout pagetitle={'Vee Bank Transfer'}>
+    <Othercomponentlayout pagetitle={'Credit Card'}>
           <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentcontainer}
@@ -55,23 +54,85 @@ const Index = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
     
- <View style={styles.bodycontainer}>
-  <ImageBackground
-          resizeMode="repeat" 
-          source={require('../../assets/Union.png')}
-  > 
-<View>
+{atmdetails?( <View style={{    padding: 15,
+    gap: 5, gap: 20}}>
+<Image
+        source={require('../../assets/Group51.png')}
+        style={{width:'100%',   resizeMode: 'contain',}}
+/>
+<Text style={styles.bbigtext}>Veebank Debit
+Mastercard</Text>
 
+<View style={{backgroundColor: 'white',
+padding: 10,
+borderRadius: 5, gap: 7}}>
+        <View style={styles.bluebgsmall}>
+<Text style={{color:'white'}}>Digital card details</Text>
+<Text style={{color:'white'}}>
+<Ionicons
+  name={!visibleBalance ? 'eye-outline' : 'eye-off-outline'}
+  size={17}
+  color='#fff'
+  style={styles.icn}
+  onPress={setfuncvisible}
+/>
+</Text>
+        </View>
 
-<Bill airtime={airtime}/>
-
+<View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
+<Text style={styles.mylabel}>Card Number</Text>
+<Text style={styles.mywordings}>{renderCardNumber(atmdetails?.card_number)} </Text>
 </View>
-</ImageBackground>
- </View>
+
+<View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
+<Text style={styles.mylabel}>CCV</Text>
+<Text style={styles.mywordings}>  {!visibleBalance ? ( '****' ) : ( `${atmdetails?.ccv}` )  } </Text>
+</View>
+
+<View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
+<Text style={styles.mylabel}>Expiry Date</Text>
+<Text style={styles.mywordings}> {!visibleBalance ? ( '** / **' ) : ( `${atmdetails?.expiry_date}` )  } </Text>
+</View>
+<View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
+<Text style={styles.mylabel}>Card Type</Text>
+<Text style={styles.mywordings}> {!visibleBalance ? ( '**********' ) : ( `${atmdetails?.card_type}` )  } </Text>
+</View>
+
+      </View>
+
+
+      <View style={{backgroundColor: 'white',
+padding: 10,
+borderRadius: 5, gap: 7}}>
+        <View style={styles.bluebgsmall}>
+<Text style={{color:'white'}}>Security</Text>
+        </View>
+
+<View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
+<Text style={styles.mylabel}>Lock card temporarily</Text>
+<Text style={styles.mywordings}>Unlocked</Text>
+</View>
+
+<TouchableOpacity style={{width:'100%', padding:20, borderRadius:5, backgroundColor:'#FF4F4F'}}>
+ <Text style={{color:'#FFE5E5', textAlign:'center'}}>Report as lost or stolen</Text> 
+</TouchableOpacity>
+
+
+
+
+      </View>
+
+ </View>): (           
+   <View style={styles.modaloverlay}>
+          <ActivityIndicator size="large" color="#d7c49e"  style={styles.loader} />
+   </View>
+          ) }
+
+
 
       </ScrollView>
     </Othercomponentlayout>
   )
 }
 
-export default Index
+export default index

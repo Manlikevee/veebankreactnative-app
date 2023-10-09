@@ -11,11 +11,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { RefreshControl } from 'react-native-gesture-handler';
 export default function index() {
 
-  
-function formattedDate(dateString) {
-  // Parse the input date string and format it
-  return dayjs(dateString).format("MMMM D, YYYY, h:mm a");
-}
+
+  function formattedDate(dateString) {
+    // Parse the input date string and format it
+    return dayjs(dateString).format("MMMM D, YYYY, h:mm a");
+  }
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [myresponseData, setmyresponseData] = useState('');
@@ -70,8 +70,8 @@ function formattedDate(dateString) {
         loading ?
           (
             <View style={styles.modaloverlay}>
-          <ActivityIndicator size="large" color="#d7c49e"  style={styles.loader} />
-          </View>
+              <ActivityIndicator size="large" color="#d7c49e" style={styles.loader} />
+            </View>
           )
 
           :
@@ -83,36 +83,36 @@ function formattedDate(dateString) {
 
 
                   <ScrollView contentContainerStyle={styles.receipt} showsVerticalScrollIndicator={false}
-                   refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                  }>
+                    refreshControl={
+                      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }>
                     <View style={styles.receiptLogo}>
                       <FeatherIcon color="#fff" name="codepen" size={32} />
                     </View>
                     {myresponseData?.is_credit ? (
-                <Text style={styles.receiptTitle}>
-From {myresponseData?.transaction.sender_user}
-                </Text>
+                      <Text style={styles.receiptTitle}>
+                        From {myresponseData?.transaction?.sender_user}
+                      </Text>
 
                     ) :
-                    
-                    (
-                      <Text style={styles.receiptTitle}>
-To {myresponseData?.transaction.recipient_user}
-                      </Text>    
-                    )}
-    
 
-                    <Text style={styles.receiptSubtitle}>Invoice #{myresponseData?.transaction.reference}</Text>
+                      (
+                        <Text style={styles.receiptTitle}>
+                          To {myresponseData?.transaction?.recipient_user}
+                        </Text>
+                      )}
+
+
+                    <Text style={styles.receiptSubtitle}>Invoice #{myresponseData?.transaction?.reference}</Text>
 
                     <View style={styles.receiptPrice}>
 
-                      
-                    <Text style={myresponseData?.is_credit ? styles.receiptPriceTextCredit : styles.receiptPriceTextDebit}>
-                      {(accounting.formatMoney(myresponseData?.amount, '₦ ', 2))}
+
+                      <Text style={myresponseData?.is_credit ? styles.receiptPriceTextCredit : styles.receiptPriceTextDebit}>
+                        {(accounting.formatMoney(myresponseData?.amount, '₦ ', 2))}
                       </Text>
 
-                    
+
                     </View>
 
                     <Text style={styles.receiptDescription}>{myresponseData?.transaction?.narration}</Text>
@@ -129,22 +129,22 @@ To {myresponseData?.transaction.recipient_user}
                         <Text style={styles.detailsField}>Date</Text>
 
                         <Text style={styles.detailsValue}>
-                        {formattedDate(myresponseData.transaction?.created_at)}
+                          {formattedDate(myresponseData.transaction?.created_at)}
                         </Text>
                       </View>
 
                       <View style={styles.detailsRow}>
                         <Text style={styles.detailsField}>Type</Text>
                         {myresponseData?.is_fundtransfer ? (
-                                  <Text style={styles.detailsValue}>
-                    Fund Transfer
-                                  </Text>
-                        ): (
                           <Text style={styles.detailsValue}>
-                         Bill Payment
-                                        </Text>
+                            Fund Transfer
+                          </Text>
+                        ) : (
+                          <Text style={styles.detailsValue}>
+                            Bill Payment
+                          </Text>
                         )}
-                
+
                       </View>
 
                       <View style={styles.detailsRow}>
@@ -156,25 +156,25 @@ To {myresponseData?.transaction.recipient_user}
                       <View style={styles.detailsRow}>
                         <Text style={styles.detailsField}>Reference</Text>
 
-                        <Text style={styles.detailsValue}>{myresponseData?.transaction.reference}</Text>
+                        <Text style={styles.detailsValue}>{myresponseData?.transaction?.reference}</Text>
                       </View>
 
                       <View style={styles.detailsRow}>
                         <Text style={styles.detailsField}>Account Name</Text>
                         {myresponseData?.is_credit ? (
-                <Text style={styles.detailsValue}>{myresponseData?.transaction.recipient_user}</Text>
+                          <Text style={styles.detailsValue}>{myresponseData?.transaction?.recipient_user}</Text>
                         ) :
-                        <Text style={styles.detailsValue}>{myresponseData?.transaction.sender_user}</Text> } 
-        
+                          <Text style={styles.detailsValue}>{myresponseData?.transaction?.sender_user}</Text>}
+
                       </View>
 
-        
+
                       <View style={styles.detailsRow}>
                         <Text style={styles.detailsField}>Status</Text>
 
                         <Text style={styles.detailsValue}>
-                    
-                          <Text>    {myresponseData?.transaction.status} </Text></Text>
+
+                          <Text>    {myresponseData?.transaction?.status} </Text></Text>
                       </View>
                     </View>
                   </ScrollView>
@@ -182,14 +182,7 @@ To {myresponseData?.transaction.recipient_user}
               </SafeAreaView>
 
               <View style={styles.overlay}>
-                <TouchableOpacity
-                  onPress={() => {
-                    // handle onPress
-                  }}>
-                  <View style={styles.btn}>
-                    <Text style={styles.btnText}>Report Transaction</Text>
-                  </View>
-                </TouchableOpacity>
+
                 <TouchableOpacity
                   onPress={() => {
                     // handle onPress

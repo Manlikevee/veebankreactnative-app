@@ -18,6 +18,7 @@ import { ToastAndroid } from 'react-native';
 import PrivateRoute from '../PrivateRoute';
 import { AuthProvider } from '../../components/StateContext'
 import { StateContext } from '../../components/StateContext';
+import Bottomsheet from '../Bottomsheet';
 const Dashboardhome = () => {
   const isFocused = useIsFocused();
 
@@ -154,6 +155,8 @@ const Dashboardhome = () => {
           </View>
         </View>
       </ScrollView>
+    
+      {mydata?.userprofile && !mydata.userprofile.is_verified && <Bottomsheet />}
 
 
 

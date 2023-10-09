@@ -8,6 +8,24 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF',
   },
+  profileLogo: {
+    width: 30,
+    height: 30,
+    borderRadius: 9999,
+    marginBottom: 12,
+    backgroundColor: '#0e0e0e',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileLogoimg: {
+    width: 30,
+    height: 30,
+    borderRadius: 9999,
+    marginBottom: 12,
+    backgroundColor: '#0e0e0e',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 placeholder:{
   color: '#707070',
   fontSize:13
@@ -34,6 +52,13 @@ fontFamily: 'Soramid',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFF',
+  },
+  containercenter2: {
+    
+    backgroundColor: '#FFF',
+  },
+  mt2:{
+paddingTop: 90
   },
   text: {
     fontSize: 24,
@@ -517,14 +542,14 @@ gap: 9,
     marginTop: 5,
   },
   availablebold: {
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: 'Soramid',
 
     color: '#27C200'
   },
 
   availablebolderror: {
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: 'Soramid',
 
     color: '#FF4F4F'
@@ -884,6 +909,8 @@ justifyContent: 'center'
     backgroundColor: '#6a9ff7',
     padding:15,
     borderRadius: 4,
+    flexDirection:'row',
+    justifyContent:'space-between'
   }
 ,
 mylabel:{
@@ -893,6 +920,16 @@ mylabel:{
     lineHeight: 23,
     fontWeight: '600',
 
+  },
+  bbigtext:{
+    textTransform: 'capitalize',
+    color: '#23325f',
+    fontSize: 17,
+    lineHeight: 23,
+    fontWeight: '600',
+    textAlign:'center',
+    marginTop: 20,
+    marginBottom: 10
   }
   ,
   mywordings:{

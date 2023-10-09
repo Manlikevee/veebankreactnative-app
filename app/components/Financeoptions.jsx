@@ -6,10 +6,10 @@ import { Link } from 'expo-router';
 const Financeoptions = () => {
 
   const dataArray = [
-    { text: 'Currency', iconName: 'earth-outline' , link: 'MyAtmpage'  },
+    { text: 'Currency', iconName: 'earth-outline' , link: 'Comingsoon'  },
     { text: 'Atm', iconName: 'card-outline' , link: 'MyAtmpage'  },
-    { text: 'Loan', iconName: 'cash-outline', link: 'MyAtmpage' },
-    { text: 'Savings', iconName: 'bar-chart-outline' , link: 'MyAtmpage'  },
+    { text: 'Loan', iconName: 'cash-outline', link: 'Comingsoon' },
+    { text: 'Savings', iconName: 'bar-chart-outline' , link: 'Comingsoon'  },
   ];
 
   return (
@@ -20,7 +20,10 @@ const Financeoptions = () => {
   
       {dataArray.map((item, index) => (
         <View style={styles.fitn} key={index}>
-          <Link href="/Mypage">
+          <Link         href={{
+          pathname: `${item.link}`,
+          params: { id: 'bacon' }
+        }}>
           <View style={styles.iconboxn}>
             <Ionicons name={item.iconName} size={24} color="#78990c" style={styles.theiconz} />
           </View>

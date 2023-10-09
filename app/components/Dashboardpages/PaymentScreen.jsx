@@ -145,7 +145,10 @@ style={stylez.statusbtn}
 
 />  
 </Text>
-<Text style={{color:'#191F33'}}>N{creditdebit?.usercreditbalance?.amount__sum}</Text>
+<Text style={{color:'#191F33'}}>
+
+{(accounting.formatMoney(creditdebit?.usercreditbalance?.amount__sum, '₦ ', 2))}
+</Text>
 </View>
 
 <View style={styles.mydebit}>
@@ -158,7 +161,10 @@ style={stylez.statusbtn}
 
 /> 
 </Text>
-<Text style={{color:'#191F33'}}>N{creditdebit?.userdebitbalance?.amount__sum}</Text>
+<Text style={{color:'#191F33'}}>
+{(accounting.formatMoney(creditdebit?.userdebitbalance?.amount__sum, '₦ ', 2))}
+  
+</Text>
 </View>
 
             </View>

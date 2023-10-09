@@ -1,16 +1,38 @@
 import { View, Button, Text, TouchableOpacity, SafeAreaView,RefreshControl, ScrollView, ImageBackground, Image ,Animated, Easing, Alert, ActivityIndicator, Pressable  } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import ScreenHeaderBtn from '../ScreenHeaderBtn';
 import { Stack, useRouter } from 'expo-router'
 import Toast from 'react-native-toast-message';
 import { Link } from 'expo-router';
 import { styles } from '../../../styles/styles';
 import Mydashboardlayout from './Mydashboardlayout'
+import { StateContext } from '../../components/StateContext';
 const ProfileScreen = () => {
+        const {mydata} = useContext(StateContext);
+        const {fetchData} = useContext(StateContext);
+        const [refreshing, setRefreshing] = useState(false);
+
+        const onRefresh = React.useCallback(() => {
+                setRefreshing(true);
+                fetchData();
+                setTimeout(() => {
+                  setRefreshing(false);
+                }, 2000);
+              }, []);
+            
+              useEffect(() => {
+                fetchData(); // Trigger the fetchData function when the component mounts
+              }, []);
+            
   return (
 
             <Mydashboardlayout>
-              <ScrollView>
+         <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentcontainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
       <SafeAreaView style={{padding: 16, gap:20}}>
       <View style={{backgroundColor: 'white',
 padding: 10,
@@ -28,23 +50,31 @@ marginTop: -70
 }}>
  
   <View style={{backgroundColor:'#E6F0FD',  borderRadius: 90, width:120, height: 120, alignItems:'center', justifyContent:'center'}}>
-<Image 
-source={require('../../../assets/user.png')}
-        style={{ 
-       
-          width:100, height: 100,
-          padding:5,
-          resizeMode: 'contain',}} ></Image>
+  <Image
+  source={
+    mydata?.userprofile?.profilephoto
+      ? { uri: mydata?.userprofile?.profile_image?.image }
+      : require('../../../assets/user.png')
+  }
+  style={{
+    width: 100,
+    height: 100,
+    padding: 5,
+    borderRadius: 90,
+    resizeMode: 'contain',
+  }}
+/>
+
   </View>
 </View>
 <View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Account Name</Text>
-<Text style={styles.mywordings}>Odah Victor Ebube</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.account_name}</Text>
 </View>
 
 <View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Account Number</Text>
-<Text style={styles.mywordings}>0774369899</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.account_number}</Text>
 </View>
 
 
@@ -59,12 +89,12 @@ borderRadius: 5, gap: 7}}>
 
 <View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Account Name</Text>
-<Text style={styles.mywordings}>Odah Victor Ebube</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.account_name}</Text>
 </View>
 
 <View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Account Number</Text>
-<Text style={styles.mywordings}>0774369899</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.account_number}</Text>
 </View>
 
 <View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
@@ -88,12 +118,12 @@ borderRadius: 5, gap: 7}}>
 
 <View style={{flexDirection:'column', gap:1,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Full Name</Text>
-<Text style={styles.mywordings}>Odah Victor Ebube</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.user?.first_name} {mydata?.useraccountdata?.user?.last_name}</Text>
 </View>
 
 <View style={{flexDirection:'column', gap:1 ,     paddingLeft:15 }}>
 <Text style={styles.mylabel}>Email</Text>
-<Text style={styles.mywordings}>Odahviktor@gmail.com</Text>
+<Text style={styles.mywordings}>{mydata?.useraccountdata?.user?.email}</Text>
 </View>
 
 

@@ -13,6 +13,8 @@ const StateProvider = ({ children }) => {
   const [mydata, setData] = useState([]);
   const [mybillsdata, setBillsData] = useState([]);
   const [creditdebit, setcreditdebit] = useState([]);
+  const [atmdetails, setatmdetails] =  useState([]);
+  const [AvailableImages, setAvailableImages] =  useState([]);
   const fetchData = () => {
     AxiosGet('/userprofile/')
       .then((response) => {
@@ -28,6 +30,35 @@ const StateProvider = ({ children }) => {
       });
   };
 
+  const fetchAvailableImages = () => {
+    AxiosGet('/AvailableImages/')
+      .then((response) => {
+        if (response) {
+          setAvailableImages(response);
+          console.log(response)
+        } else {
+          console.error('Error: Unexpected status code', response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  const fetchatmData = () => {
+    AxiosGet('/generate_single_atm_card/')
+      .then((response) => {
+        if (response) {
+          setatmdetails(response);
+          console.log(response)
+        } else {
+          console.error('Error: Unexpected status code', response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
 const Transactiondata = () => {
     AxiosGet('/creditanddebit')
       .then((response) => {
@@ -75,7 +106,7 @@ const Transactiondata = () => {
     useword('test');
   };
   return (
-    <StateContext.Provider value={{token, setToken, isAuthenticated, loginfunc, logoutauth, word, usewording, mydata, fetchData , fetchBills, mybillsdata, setIsAuthenticated, Transactiondata, creditdebit}}>
+    <StateContext.Provider value={{fetchatmData, fetchAvailableImages, AvailableImages, atmdetails, token, setToken, isAuthenticated, loginfunc, logoutauth, word, usewording, mydata, fetchData , fetchBills, mybillsdata, setIsAuthenticated, Transactiondata, creditdebit}}>
       {children}
     </StateContext.Provider>
   );

@@ -20,7 +20,6 @@ const index = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingbar, Setloadingbar] = useState(false)
-  const {setIsAuthenticated} = useContext(StateContext);
 
 
   const handleSignIn = async () => {
@@ -59,7 +58,7 @@ const index = () => {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER
           );
-          setIsAuthenticated(true)
+
           router.replace('/Mydash');
           // Display a success message using Toast
     
@@ -131,12 +130,13 @@ const index = () => {
 <View style={styles.myimput}>
 <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Username"
         onChangeText={(text) => setEmail(text)}
         value={email}
-        
+        autoCapitalize="none"
       />
       <TextInput
+              autoCapitalize="none"
         style={styles.input}
         placeholder="Password"
         onChangeText={(text) => setPassword(text)}

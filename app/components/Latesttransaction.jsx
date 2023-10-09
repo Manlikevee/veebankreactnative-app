@@ -4,8 +4,9 @@ import { styles } from '../../styles/styles';
 import accounting from 'accounting';
 import dayjs from 'dayjs';
 import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 const Latesttransaction = ({mydata}) => {
-
+  const route = useRouter();
   function formattedDate(dateString) {
     // Parse the input date string and format it
     return dayjs(dateString).format("MMMM D, YYYY, h:mm a");
@@ -16,7 +17,11 @@ const Latesttransaction = ({mydata}) => {
     <View style={styles.mydashboarddata}>
       <View style={styles.spacebetween}>
       <Text style={styles.available}>Latest Transaction  </Text>
-      <Text style={styles.availablelight}>All  &gt;</Text>
+      <Text style={styles.availablelight}
+             onPress={() => {
+              route.push('Transactionhistory')
+          }}
+      >All  &gt;</Text>
       </View>
 
       <View style={styles.spacebetweens}>
