@@ -75,7 +75,8 @@ const index = () => {
 
   const beneficarysave = async () => {
 
-    AxiosInstance.post('/Savebeneficiary/', {
+    AxiosInstance
+      .post('/Savebeneficiary/', {
         "accountnumber": `${accountnumber}`,
         "accountname": `${accountname}`,
         "bankcode": `${bankcode}`,
@@ -100,7 +101,7 @@ const index = () => {
       })
       .catch(error => {
         // Handle errors
-        setSavebene(true)
+              setSavebene(true)
         setSavebenetext(`${error.response?.data?.detail || 'An error occurred'}`);
         console.log(error)
         Toast.show({

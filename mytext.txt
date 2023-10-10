@@ -1,0 +1,40 @@
+
+  const beneficarysave = async () => {
+
+    AxiosInstance
+      .post('/Savebeneficiary/', {
+        "accountnumber": `${accountnumber}`,
+        "accountname": `${accountname}`,
+        "bankcode": `${bankcode}`,
+        "bank": `${Bank}`,
+      } 
+      
+      )
+      .then(response => {
+        // Handle the response as needed
+        const responseData = response.data;
+        console.log(response.data)
+        setSavebene(true)
+        setSavebenetext('Beneficiary Saved')
+        // Display success toast
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Transaction completed successfully',
+        });
+        // You can now use responseData to access the data from the response
+        console.log('Transaction Data:', responseData);
+      })
+      .catch(error => {
+        // Handle errors
+        console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error.response?.data?.detail || 'An error occurred',
+        });
+        setSavebenetext(`${error.response?.data?.detail || 'An error occurred'}`);
+
+      });
+
+  };
