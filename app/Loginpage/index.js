@@ -149,10 +149,11 @@ const index = () => {
 <View style={styles.butonthree}>
     
     
-    {loadingbar ?   <TouchableOpacity
+    {loadingbar ?  
+     <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          handleSignIn()
+        
     
       }}
       >

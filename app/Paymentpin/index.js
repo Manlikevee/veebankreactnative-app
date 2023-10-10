@@ -1,5 +1,5 @@
 import { View, Button, RefreshControl, Text, Modal, TextInput, TouchableOpacity, SafeAreaView, ScrollView, ImageBackground, Image, Animated, Easing, Alert, ActivityIndicator } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { useLocalSearchParams } from 'expo-router'
 import { styles } from '../../styles/styles';
 import Toast from 'react-native-toast-message';
@@ -7,8 +7,9 @@ import Othercomponentlayout from '../components/Othercomponentlayout';
 import accounting from 'accounting';
 import AxiosInstance from '../Utils/AxiosInstance';
 import Popupreceipt from '../components/Transfercomponents/Popupreceipt';
-
+import { StateContext } from '../components/StateContext';
 const index = () => {
+  const {mydata} = useContext(StateContext);
   const firstInput = useRef();
   const secondInput = useRef();
   const thirdInput = useRef();
@@ -21,10 +22,14 @@ const index = () => {
   const { myamount } = useLocalSearchParams();
   const {mynaration} = useLocalSearchParams();
   const [myresponseData, setmyresponseData] = useState('');
-
+  const [Savebene, setSavebene] = useState(false);
+  const [Savebenetext, setSavebenetext] = useState('');
+  const bankcode = '004'
+  const [loadingbar, Setloadingbar] = useState(false)
   const otpValue = `${otp["1"]}${otp["2"]}${otp["3"]}${otp["4"]}`;
 
   const handleSubmit = async () => {
+    Setloadingbar(true)
     console.log(otpValue)
     AxiosInstance
       .post('/Newtransaction', {
@@ -47,10 +52,12 @@ const index = () => {
         // You can now use responseData to access the data from the response
         console.log('Transaction Data:', responseData);
         setmyresponseData(responseData)
+        Setloadingbar(false)
         showpopup();
       })
       .catch(error => {
         // Handle errors
+        Setloadingbar(false)
         console.log(error)
         Toast.show({
           type: 'error',
@@ -65,6 +72,40 @@ const index = () => {
     setModalVisible(true)
   }
 
+  const beneficarysave = async () => {
+
+    AxiosInstance.post('/Savebeneficiaryinternal/', {
+        "accountnumber": `${accountnumber}`,
+        "accountname": `${accountname}`,
+      } ).then(response => {
+        // Handle the response as needed
+        const responseData = response.data;
+        console.log(response.data)
+        setSavebene(true)
+        setSavebenetext('Beneficiary Saved')
+        // Display success toast
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Transaction completed successfully',
+        });
+        // You can now use responseData to access the data from the response
+        console.log('Transaction Data:', responseData);
+      }).catch(error => {
+        // Handle errors
+        setSavebene(true)
+        setSavebenetext(`${error.response?.data?.detail || 'An error occurred'}`);
+        console.log(error)
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error.response?.data?.detail || 'An error occurred',
+        });
+
+
+      });
+
+  };
   return (
     <Othercomponentlayout pagetitle={'Bank Transfer'}>
 
@@ -75,7 +116,7 @@ const index = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}>
-<Popupreceipt data={myresponseData}/>
+<Popupreceipt data={myresponseData} beneficarysave={beneficarysave} Savebene={Savebene} Savebenetext={Savebenetext}/>
       </Modal>
       ) : ('') }
 
@@ -106,7 +147,7 @@ const index = () => {
             </View>
             <View style={styles.spacebet}>
               <Text style={styles.placeholder}>Sender Name </Text>
-              <Text style={styles.placevalue}>ODAH VICTOR EBUBE</Text>
+              <Text style={styles.placevalue}>{mydata?.useraccountdata?.account_name}</Text>
             </View>
 
             <View style={styles.spacebet}>
@@ -192,6 +233,21 @@ const index = () => {
       </View>
 
 
+      {loadingbar ?  
+     <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+        
+    
+      }}
+      >
+
+
+
+<ActivityIndicator size="small" color="#d7c49e"   />
+
+      </TouchableOpacity> :
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -202,7 +258,7 @@ const index = () => {
 
 
         <Text style={styles.buttonText}>Send</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> }
 
         </ImageBackground>
 

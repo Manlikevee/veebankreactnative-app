@@ -57,7 +57,7 @@ const vee =  await AsyncStorage.getItem('my-access-key');
         source={require('../assets/logo2.png')}
         style={styles.image}
       />
-{isloading? (<ActivityIndicator size="large" color="#d7c49e"  style={styles.loader} />) : 
+{isloading? (<ActivityIndicator size="large" color="#d7c49e"  style={styles.loader} onPress={handleButtonPress}  />) : 
 (
 <TouchableOpacity onPress={handleButtonPress}       style={styles.splashbutton}  >
      <Text style={styles.splashbuttontext}>Proceed</Text>

@@ -1,4 +1,7 @@
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-toast-message';
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,7 +12,10 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 const Bottomsheet = () => {
+  const navigation = useNavigation();
     const route = useRouter();
     const sheet = React.useRef();
     
@@ -17,6 +23,18 @@ const Bottomsheet = () => {
       sheet.current.open();
     }, []);
 
+    const logoutfunc = async  () => {
+      await AsyncStorage.removeItem('my-access-key');
+      await AsyncStorage.removeItem('my-refresh-key');
+  
+      ToastAndroid.showWithGravity(
+        'User Logged Out successful',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
+      navigation.navigate('index');
+
+    }
 
   return (
  <RBSheet
@@ -55,7 +73,7 @@ const Bottomsheet = () => {
 
           <TouchableOpacity
             onPress={() => {
-              // handle onPress
+              logoutfunc()
             }}>
             <View style={styles.btnSecondary}>
               <Text style={styles.btnSecondaryText}>Logout</Text>

@@ -18,10 +18,10 @@ const Serviceplan = () => {
         { id: 6, imageName: 'bus-outline', label: 'Transport' , color: '#203d72' , link:'AllBills' , pagetitle:'transport', pagekey:'Ref Number' },
         { id: 7, imageName: 'card-outline', label: 'Gift Card', color: '#203d72' , link:'AllBills' , pagetitle:'giftcards' , pagekey:'Ref Number' },
        { id: 9, imageName: 'book-outline', label: 'Education' , color: '#203d72' , link:'AllBills' , pagetitle:'educations'  , pagekey:'Ref Number'},
-        { id: 10, imageName: 'send-outline', label: 'Refer' , color: '#203d72' , link:'AllBills' , pagetitle:null , pagekey:'Ref Number' },
+        { id: 10, imageName: 'musical-notes-outline', label: 'Music' , color: '#203d72' , link:'AllBills' , pagetitle:'music' , pagekey:'Ref Number' },
         { id: 11, imageName: 'cash-outline', label: 'Savings' , color: '#203d72' , link:'AllBills' , pagetitle:null , pagekey:'Ref Number' },
-        { id: 12, imageName: 'card-outline', label: 'Cowry' , color: '#203d72' , link:'AllBills' , pagetitle:null , pagekey:'Ref Number' },
-        { id: 13, imageName: 'card-outline', label: 'Cowry' , color: '#203d72' , link:'AllBills' , pagetitle:null , pagekey:'Ref Number' },
+        { id: 12, imageName: 'card-outline', label: 'Cowry' , color: '#203d72' , link:'AllBills' , pagetitle:'transport', pagekey:'Ref Number' },
+        { id: 13, imageName: 'qr-code-outline', label: 'QR-Code' , color: '#203d72' , link:'AllBills' , pagetitle:null , pagekey:'Ref Number' },
         // Add more objects as needed
       ];
       const getImageSource = (imageName) => {

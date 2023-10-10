@@ -5,7 +5,7 @@ import AxiosInstance from  '../../Utils/AxiosInstance'
 import BeneficaryCard from '../BeneficaryCard';
 import Toast from 'react-native-toast-message';
 import Mybalancecard from '../Mybalancecard';
-
+import { StateContext } from '../StateContext';
 import { Link } from 'expo-router';
 
 const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
@@ -14,9 +14,12 @@ const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
     const [accountName, setAccountName] = useState('');
     const [amount, setamount] = useState('');
     const [narration, setnarration] = useState('');
+    const [activeCard, setActiveCard] = useState(null);
     const [selectedBank, setSelectedBank] = useState('Vee Bank');
     const [loadingVerification, setLoadingVerification] = useState(false);
-    
+    const {Beneficiarydata} = useContext(StateContext);
+    const {mybeneficary} = useContext(StateContext);
+
     const isFormValid = accountNumber !== '' && selectedBank !== '' && accountName !== '' && amount !== '';
 
     function getFirstTwoInitials(name) {
@@ -40,7 +43,36 @@ const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
           setAccountName('');
         }
       };
+    
+      const handleCardPress = async (cardId) => {
+        const selectedBeneficiary = Beneficiarydata?.inhousebeneficary.find((beneficiary) => beneficiary.id === cardId);
+        Setloadingbar(true)
+        if (selectedBeneficiary) {
+          // Extract 'bank_code' and 'bank' from the selected beneficiary
+          const { bank_code, bank, account_number } = selectedBeneficiary;
       
+          setAccountNumber(account_number);
+          setIsFocus(false);
+      
+          try {
+            const response = await AxiosInstance.get(`bank/resolve/${accountNumber}`);
+      
+            setAccountName(response.data.data.account_name);
+            Setloadingbar(false)
+            Toast.show({
+              type: 'success',
+              text1: 'Account Name Fetched👋',
+            });
+          } catch (error) {
+            setIsFocus(false);
+            // Handle any errors from the Axios request
+            console.error('Error fetching account name:', error);
+            // You may want to display an error message to the user here.
+          }
+        }
+      
+        setActiveCard(cardId);
+      };
   
       const data = [
         { id: '1', title: 'Victor Odah' },
@@ -68,6 +100,12 @@ const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
           );
        }
       }
+
+      useEffect(() => {
+
+        mybeneficary();
+
+        }, []);
 
     const handleAccountVerification = async () => {
         Setloadingbar(true)
@@ -117,6 +155,8 @@ const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
 
 
  <Mybalancecard data={mydata}/>
+
+ {Beneficiarydata?.mybeneficary?
  <View>
     <View style={styles.spacebetween}>
       <Text style={styles.available}>Beneficary </Text>
@@ -125,12 +165,18 @@ const Internalbanktransfer = ({fetchBanks , banks, loadingBanks, mydata }) => {
 
       <FlatList
         style={{padding: 10,}}
-        data={data}
+        data={Beneficiarydata?.inhousebeneficary}
         horizontal={true}
-        renderItem={({ item }) => <BeneficaryCard title={item.title} firstlast={getFirstTwoInitials(item.title)} />}
+        renderItem={({ item }) => <BeneficaryCard title={item.account_name} firstlast={getFirstTwoInitials(item.account_name)}
+        isActive={item.id === activeCard}   onPress={handleCardPress} id={item.id}
+        />}
         keyExtractor={(item) => item.id}
       />
-  </View>
+
+
+  </View> : ('')
+}
+
 
 
 

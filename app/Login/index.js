@@ -34,7 +34,7 @@ const index = () => {
       </View>
 </View>
 <View style={styles.pad}>
-<Text style={styles.veetitle}>  Bank on-the-go with <Text style={styles.gold}>Vee App</Text> </Text>
+<Text style={styles.veetitle}>  Bank on-the-go with <Text style={styles.gold}>PreshPay</Text> </Text>
 
 <Text style={styles.mediumtext}>Manage your finances anytime, anywhere with our online banking app.</Text>
 

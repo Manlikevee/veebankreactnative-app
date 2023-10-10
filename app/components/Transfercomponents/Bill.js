@@ -158,7 +158,9 @@ const Bill = ({airtime, mydata }) => {
         onChangeText={(text) => setphoneNumber(text)}
         value={phoneNumber}
       />
-<Text>{amount}</Text>
+
+
+<Text style={styles.gridText}>N={amount}</Text>
 
 
       

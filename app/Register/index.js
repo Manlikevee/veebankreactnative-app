@@ -90,9 +90,6 @@ const index = () => {
   };
   
   const handleRegistration = async () => {
-
-
-
     Setloadingbar(true);
     axios.post('https://veebankbackend.vercel.app/registration/', {
       'username': `${username}`,
@@ -114,8 +111,9 @@ const index = () => {
         });
         // You can now use responseData to access the data from the response
         console.log('Transaction Data:', responseData);
-        Setloadingbar(false);
+     
         router.replace('/Registrationstageone');
+        Setloadingbar(false);
       })
       .catch(error => {
         // Handle errors
@@ -157,7 +155,7 @@ const index = () => {
 <View style={[styles.pad, styles.bgw, styles.mt2]}>
 
       <Text style={styles.title}>Create An Account</Text>
-      <Text style={styles.mediumtext}>Join Us for Exciting Opportunities</Text>
+      <Text style={styles.mediumtext}>Explore a world of exciting opportunities in PreshPay. Join our vibrant community, where innovation thrives, and new possibilities awaits</Text>
 
 
 <View style={styles.myimput}>
@@ -166,7 +164,7 @@ const index = () => {
                 autoCapitalize="none"
                 autoCorrect={false}
         style={styles.input}
-        placeholder="Username name"
+        placeholder="Username"
         onChangeText={(text) => setusername(text)}
         value={username}
       />
@@ -235,7 +233,7 @@ const index = () => {
 
 
 
-        <Text style={styles.buttonText}>Sign In</Text>
+        <Text style={styles.buttonText}>Register</Text>
 
       </TouchableOpacity>
 

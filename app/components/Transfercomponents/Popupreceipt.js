@@ -4,9 +4,9 @@ import {styles} from '../../../styles/styles'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Stack, useRouter } from 'expo-router'
 import accounting from 'accounting';
+import Toast from 'react-native-toast-message';
 
-
-const Popupreceipt = ({data}) => {
+const Popupreceipt = ({data, beneficarysave, Savebene, Savebenetext}) => {
   const route = useRouter();
   const handleButtonPress = async () => {
     route.push('Mydash')
@@ -59,17 +59,31 @@ const Popupreceipt = ({data}) => {
               <Text style={styles.placevalue}>0.00</Text>
             </View>
 
-            <TouchableOpacity
-        style={styles.button}
+{Savebene ? (           <TouchableOpacity
+        style={styles.buttonorange}
         onPress={() => {
-       
+     
         }}
       >
 
 
 
-        <Text style={styles.buttonText}>Save As Beneficiary</Text>
-      </TouchableOpacity>
+        <Text style={styles.buttonText}>{Savebenetext}</Text>
+      </TouchableOpacity>) : (
+                   <TouchableOpacity
+                   style={styles.button}
+                   onPress={() => {
+                     beneficarysave()
+                   }}
+                 >
+           
+           
+           
+                   <Text style={styles.buttonText}>Save As Beneficiary</Text>
+                 </TouchableOpacity>
+      )}
+
+ 
  
      </View>
 
